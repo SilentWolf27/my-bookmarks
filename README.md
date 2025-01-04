@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MyBookmarks
 
-## Getting Started
+MyBookmarks is a simple web application designed to organize and store frequently accessed services and pages in one central location. It helps users manage and quickly access their streaming services, learning subscriptions, shopping sites, and software tools.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Category management:
+  
+  - [] Users can create, edit, and delete categories to organize their bookmarks (e.g., streaming services, learning subscriptions, shopping sites, software tools).
+  - [] Fully customizable categories allow users to group bookmarks based on their preferences and needs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Bookmark management:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  - [] Users can add, edit, and delete bookmarks within each category.
+  - [] Each bookmark includes a title, URL, and description to help users identify and access the desired service or page.
+  - [] Users can easily search for bookmarks by title or description to quickly find the desired link.
+  - [] In the future, users will be able to add more details to bookmarks, such as tags, ratings, and notes, cost, or expiration date to connect with other services.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- User-friendly navigation:
 
-## Learn More
+  - [] The application features a clean and intuitive user interface that allows users to navigate between categories and bookmarks effortlessly.
+  - [] Users can mark bookmarks as favorites to access them quickly from the main page.
+  - [] Most used bookmarks will be displayed on the main page for quick access.
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Frontend:
+  - Next.js
+  - Tailwind CSS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Backend:
+  - Next.js Server Actions
+  - Supabase
 
-## Deploy on Vercel
+- Database:
+  - PostgreSQL
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Hosting:
+  - Vercel
