@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-export const getSupabaseServerClient = async (): Promise<SupabaseClient> => {
+export const createClient = async (): Promise<SupabaseClient> => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -13,8 +13,10 @@ export const getSupabaseServerClient = async (): Promise<SupabaseClient> => {
 
   return createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
+      getAll() {
+        return cookieStore.getAll();
+      },
+      setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)

@@ -6,12 +6,6 @@ export async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
-  if (!!user && (path === "/login" || path === "/"))
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-
-  if (!user && path !== "/login")
-    return NextResponse.redirect(new URL("/login", request.url));
-
   return supabaseResponse;
 }
 
