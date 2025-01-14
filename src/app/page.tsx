@@ -1,3 +1,3 @@
 export default function Home() {
-  return <main>My BookMarks</main>;
+  return <main>{process.env.NODE_ENV}</main>;
 }
