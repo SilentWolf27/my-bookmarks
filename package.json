@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "start:test": "set NODE_ENV=test&&next dev"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.10",
     "@types/jsonwebtoken": "^9.0.7",
