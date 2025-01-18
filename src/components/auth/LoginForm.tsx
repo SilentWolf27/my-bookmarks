@@ -4,7 +4,7 @@ import { EmailLoginForm } from "./EmailLoginForm";
 
 export function LoginForm() {
   return (
-    <div className="max-w-sm flex flex-col gap-6">
+    <div className="max-w-sm flex flex-col gap-6 bg-white py-12 px-10 rounded-md">
       <SocialLoginForm>
         <GithubFilled />
         Inicia Sesión con GitHub
