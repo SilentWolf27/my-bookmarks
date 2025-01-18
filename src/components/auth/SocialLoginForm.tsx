@@ -10,7 +10,7 @@ export function SocialLoginForm({ children }: Props) {
     <form>
       <button
         type="submit"
-        className="w-100  flex justify-center items-center gap-2 border border-zinc-300 rounded-md py-2 px-4">
+        className="w-full  flex justify-center items-center gap-2 border border-zinc-300 rounded-md py-2 px-4">
         {children}
       </button>
     </form>

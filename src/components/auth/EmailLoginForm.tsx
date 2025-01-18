@@ -22,7 +22,7 @@ export function EmailLoginForm() {
       <button
         type="submit"
         className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300">
-        Iniciar sesión
+        Inicia sesión
       </button>
     </form>
   );

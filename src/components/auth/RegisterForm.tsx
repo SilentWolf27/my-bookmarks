@@ -1,14 +1,14 @@
-import { EmailLoginForm } from "./EmailLoginForm";
+import { EmailRegisterForm } from "./EmaiRegisterForm";
 import { GithubFilled } from "@ant-design/icons";
 import { SocialLoginForm } from "./SocialLoginForm";
 import Link from "next/link";
 
-export function LoginForm() {
+export function RegisterForm() {
   return (
     <div className="w-full max-w-sm flex flex-col gap-6 bg-white py-12 px-10 rounded-md">
       <SocialLoginForm>
         <GithubFilled />
-        Inicia Sesión con GitHub
+        Regístrate con GitHub
       </SocialLoginForm>
 
       <div className="flex items-center gap-4">
@@ -17,14 +17,14 @@ export function LoginForm() {
         <span className="inline-block border-b border-zinc-300 w-full"></span>
       </div>
 
-      <EmailLoginForm />
+      <EmailRegisterForm />
 
       <p className="text-sm text-right">
-        ¿Aún no tienes una cuenta?{" "}
+        ¿Ya tienes una cuenta?{" "}
         <Link
-          href="/registro"
+          href="/login"
           className="text-indigo-500 hover:underline decoration-indigo-600">
-          Regístrate aquí
+          Inicia sesión aquí
         </Link>
       </p>
     </div>
