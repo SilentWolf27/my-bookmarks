@@ -22,7 +22,7 @@ export function LoginForm() {
       <p className="text-sm text-right">
         ¿Aún no tienes una cuenta?{" "}
         <Link
-          href="/registro"
+          href="registro"
           className="text-indigo-500 hover:underline decoration-indigo-600">
           Regístrate aquí
         </Link>

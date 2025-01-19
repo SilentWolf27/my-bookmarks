@@ -22,7 +22,7 @@ export function RegisterForm() {
       <p className="text-sm text-right">
         ¿Ya tienes una cuenta?{" "}
         <Link
-          href="/login"
+          href="login"
           className="text-indigo-500 hover:underline decoration-indigo-600">
           Inicia sesión aquí
         </Link>

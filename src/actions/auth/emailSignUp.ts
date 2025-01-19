@@ -1,5 +1,6 @@
 "use server";
 
+import { buildErrorFromSupabase } from "@/libs/error/supabase";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -10,7 +11,7 @@ export type RegisterFormValues = {
 };
 
 type RegisterFormResult = {
-  error: string;
+  error: Error;
 };
 
 export async function emailSignUp(
@@ -18,7 +19,7 @@ export async function emailSignUp(
 ): Promise<void | RegisterFormResult> {
   const supabase = await createClient();
 
-  const { error, data } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email: values.email,
     password: values.password,
     options: {
@@ -26,10 +27,10 @@ export async function emailSignUp(
     },
   });
 
-  if (error) {
-    console.error("Sign up error:", error);
-    return { error: error.message };
-  }
+  if (error)
+    return {
+      error: buildErrorFromSupabase(error.code),
+    };
 
   return redirect("/");
 }

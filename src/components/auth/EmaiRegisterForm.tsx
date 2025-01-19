@@ -12,13 +12,17 @@ export function EmailRegisterForm() {
     handleSubmit,
     register,
     trigger,
+    setError,
     formState: { errors: formErrors, isSubmitting },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = (data) =>
-    emailSignUp(data);
+  const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
+    const result = await emailSignUp(data);
+
+    if (result?.error) setError("root", { message: result.error.message });
+  };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = async ({ target }) => {
     const name = target.name as keyof RegisterFormValues;
@@ -86,6 +90,9 @@ export function EmailRegisterForm() {
         className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300">
         {isSubmitting ? <LoadingOutlined /> : "Registrarse"}
       </button>
+      {formErrors.root && (
+        <span className="text-red-600 text-sm">{formErrors.root.message}</span>
+      )}
     </form>
   );
 }
