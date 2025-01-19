@@ -22,7 +22,7 @@ export async function emailSignUp(
     email: values.email,
     password: values.password,
     options: {
-      emailRedirectTo: "http://localhost:3000",
+      emailRedirectTo: process.env.EMAIL_CONFIRMATION_REDIRECT_URI,
     },
   });
 
