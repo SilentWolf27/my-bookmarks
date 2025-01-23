@@ -5,9 +5,9 @@ interface Props {
   action?: () => void;
 }
 
-export function SocialLoginForm({ children }: Props) {
+export function SocialLoginForm({ children, action }: Props) {
   return (
-    <form>
+    <form action={action}>
       <button
         type="submit"
         className="w-full  flex justify-center items-center gap-2 border border-zinc-300 rounded-md py-2 px-4">

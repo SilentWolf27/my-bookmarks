@@ -2,11 +2,12 @@ import { EmailLoginForm } from "./EmailLoginForm";
 import { GithubFilled } from "@ant-design/icons";
 import { SocialLoginForm } from "./SocialLoginForm";
 import Link from "next/link";
+import { SignInWithGithub } from "@/actions/auth/github";
 
 export function LoginForm() {
   return (
     <div className="w-full max-w-sm flex flex-col gap-6 bg-white py-12 px-10 rounded-md">
-      <SocialLoginForm>
+      <SocialLoginForm action={SignInWithGithub}>
         <GithubFilled />
         Inicia Sesión con GitHub
       </SocialLoginForm>
