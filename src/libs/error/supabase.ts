@@ -3,6 +3,8 @@ export function buildErrorFromSupabase(code: unknown): Error {
   switch (code) {
     case "user_already_exists":
       return new Error("El correo electrónico ya se encuentra registrado");
+    case "invalid_credentials":
+      return new Error("El correo electrónico o la contraseña son incorrectos");
     default:
       console.error("Unhandled error code:", code);
       return new Error(
