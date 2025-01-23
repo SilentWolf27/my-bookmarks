@@ -87,7 +87,8 @@ export function EmailRegisterForm() {
 
       <button
         type="submit"
-        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300">
+        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300 disabled:bg-indigo-300"
+        disabled={isSubmitting}>
         {isSubmitting ? <LoadingOutlined /> : "Registrarse"}
       </button>
       {formErrors.root && (

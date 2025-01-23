@@ -8,7 +8,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { emailSignIn } from "@/actions/auth/emailSignIn";
 import { FocusEventHandler, useState } from "react";
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 
 export function EmailLoginForm() {
   const {
@@ -78,8 +82,9 @@ export function EmailLoginForm() {
 
       <button
         type="submit"
-        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300">
-        Inicia sesión
+        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300 disabled:bg-indigo-300"
+        disabled={isSubmitting}>
+        {isSubmitting ? <LoadingOutlined /> : "Iniciar sesión"}
       </button>
 
       {formErrors.root && (
