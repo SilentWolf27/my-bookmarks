@@ -1,21 +1,16 @@
 "use server";
 
 import { buildErrorFromSupabase } from "@/libs/error/supabase";
+import { signUpFormValues } from "@/schemas/auth/signup";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-
-export type RegisterFormValues = {
-  name: string;
-  email: string;
-  password: string;
-};
 
 type RegisterFormResult = {
   error: Error;
 };
 
 export async function emailSignUp(
-  values: RegisterFormValues
+  values: signUpFormValues
 ): Promise<void | RegisterFormResult> {
   const supabase = await createClient();
 

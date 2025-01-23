@@ -11,3 +11,5 @@ export const signUpSchema = z.object({
     .nonempty({ message: "Este campo es requerido" })
     .min(8, { message: "La contraseña debe tener al menos 8 caracteres" }),
 });
+
+export type signUpFormValues = z.infer<typeof signUpSchema>;
