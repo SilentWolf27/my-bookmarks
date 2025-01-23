@@ -1,7 +1,7 @@
 "use client";
 
-import { emailSignUp, RegisterFormValues } from "@/actions/auth/emailSignUp";
-import { signUpSchema } from "@/schemas/auth/signup";
+import { emailSignUp } from "@/actions/auth/emailSignUp";
+import { signUpSchema, signUpFormValues } from "@/schemas/auth/signup";
 import { LoadingOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FocusEventHandler } from "react";
@@ -14,18 +14,18 @@ export function EmailRegisterForm() {
     trigger,
     setError,
     formState: { errors: formErrors, isSubmitting },
-  } = useForm<RegisterFormValues>({
+  } = useForm<signUpFormValues>({
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
+  const onSubmit: SubmitHandler<signUpFormValues> = async (data) => {
     const result = await emailSignUp(data);
 
     if (result?.error) setError("root", { message: result.error.message });
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = async ({ target }) => {
-    const name = target.name as keyof RegisterFormValues;
+    const name = target.name as keyof signUpFormValues;
     await trigger(name);
   };
 
