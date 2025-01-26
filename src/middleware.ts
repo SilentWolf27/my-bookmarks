@@ -7,11 +7,14 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isAuthRoute = path.startsWith("/auth");
 
-  if (!!user && isAuthRoute)
-    return NextResponse.redirect(new URL("/", request.url));
-
   if (!user && !isAuthRoute)
     return NextResponse.redirect(new URL("/auth/login", request.url));
+
+  if (path === "/")
+    return NextResponse.redirect(new URL("/inicio", request.url));
+
+  if (!!user && isAuthRoute)
+    return NextResponse.redirect(new URL("/inicio", request.url));
 
   return supabaseResponse;
 }
