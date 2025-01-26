@@ -1,5 +1,6 @@
 import { signOut } from "@/actions/auth/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export function SideBar() {
   return (
@@ -7,11 +8,11 @@ export function SideBar() {
       <article>
         <div className="flex justify-between items-center">
           <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
-          <button
-            type="button"
-            className="bg-zinc-300 w-7 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-sm">
+          <Link
+            href={"/nuevo"}
+            className="flex justify-center items-center bg-zinc-300 px-2 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-sm">
             <PlusOutlined className="text-sm" />
-          </button>
+          </Link>
         </div>
       </article>
       <form action={signOut}>
