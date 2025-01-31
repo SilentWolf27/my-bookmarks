@@ -44,6 +44,7 @@ export default function CollectionForm() {
             formErrors.name ? "border-red-600" : ""
           }`}
           onBlur={onBlur}
+          autoComplete="off"
         />
       </div>
 

@@ -26,7 +26,7 @@ export default function NewItemPage() {
   return (
     <Modal>
       <div className="w-full max-w-md bg-white rounded-md py-6 px-4">
-        <ModalHeader className="mb-2" onClose={closeModal}>
+        <ModalHeader className="mb-3" onClose={closeModal}>
           {itemType !== null && (
             <button onClick={() => selectItemType(null)} className="text-base">
               <ArrowLeftOutlined />
