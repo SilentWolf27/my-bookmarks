@@ -1,13 +1,21 @@
+"use client";
+
+import { createCollection } from "@/actions/collections/create";
 import {
   CollectionFormValues,
   createCollectionSchema,
 } from "@/schemas/collections/create";
 import { LoadingOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect } from "next/navigation";
 import { FocusEventHandler } from "react";
 import { useForm } from "react-hook-form";
 
-export default function CollectionForm() {
+interface Props {
+  onClose?: () => void;
+}
+
+export default function CollectionForm({ onClose }: Props) {
   const {
     handleSubmit,
     register,
@@ -19,7 +27,15 @@ export default function CollectionForm() {
   });
 
   const onSubmit = async (data: CollectionFormValues) => {
-    console.log(data);
+    const response = await createCollection(data);
+
+    if (response.error) {
+      setError("root", { message: response.error.message });
+      return;
+    }
+
+    if (onClose) onClose();
+    redirect("/inicio");
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = async ({ target }) => {
@@ -64,6 +80,10 @@ export default function CollectionForm() {
           {isSubmitting ? <LoadingOutlined /> : "Guardar"}
         </button>
       </div>
+
+      {formErrors.root && (
+        <span className="text-red-600 text-sm">{formErrors.root.message}</span>
+      )}
     </form>
   );
 }

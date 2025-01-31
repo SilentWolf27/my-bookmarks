@@ -46,7 +46,9 @@ export default function NewItemPage() {
           </div>
         )}
 
-        {itemType === ItemType.Collection && <CollectionForm />}
+        {itemType === ItemType.Collection && (
+          <CollectionForm onClose={closeModal} />
+        )}
       </div>
     </Modal>
   );
