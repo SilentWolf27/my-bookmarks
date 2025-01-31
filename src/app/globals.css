@@ -18,3 +18,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.field-sizing-content {
+  field-sizing: content;
+}

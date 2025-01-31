@@ -2,7 +2,8 @@
 
 import Modal from "@/components/common/Modal/Modal";
 import ModalHeader from "@/components/common/Modal/ModalHeader";
-import SelectItemType from "@/components/CreateItems/ItemType";
+import CollectionForm from "@/components/Items/CollectionForm";
+import SelectItemType from "@/components/Items/ItemType";
 import { ItemType } from "@/interfaces/Item";
 import {
   ArrowLeftOutlined,
@@ -25,7 +26,7 @@ export default function NewItemPage() {
   return (
     <Modal>
       <div className="w-full max-w-md bg-white rounded-md py-6 px-4">
-        <ModalHeader onClose={closeModal}>
+        <ModalHeader className="mb-2" onClose={closeModal}>
           {itemType !== null && (
             <button onClick={() => selectItemType(null)} className="text-base">
               <ArrowLeftOutlined />
@@ -44,6 +45,8 @@ export default function NewItemPage() {
             </SelectItemType>
           </div>
         )}
+
+        {itemType === ItemType.Collection && <CollectionForm />}
       </div>
     </Modal>
   );
