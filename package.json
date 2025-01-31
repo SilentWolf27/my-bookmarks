@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "start:test": "set NODE_ENV=test&&next dev"
+    "start:test": "set NODE_ENV=test&&next dev",
+    "db:migrate": "npx supabase migration up",
+    "db:pull": "npx supabase db pull",
+    "db:push": "npx supabase db push"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
