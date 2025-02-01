@@ -2,7 +2,7 @@
 
 import Modal from "@/components/common/Modal/Modal";
 import ModalHeader from "@/components/common/Modal/ModalHeader";
-import CollectionForm from "@/components/Items/CollectionForm";
+import CollectionForm from "@/components/collections/CollectionForm";
 import SelectItemType from "@/components/Items/ItemType";
 import { ItemType } from "@/interfaces/Item";
 import {
