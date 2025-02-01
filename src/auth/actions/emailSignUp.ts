@@ -1,8 +1,8 @@
 "use server";
 
-import { buildErrorFromSupabase } from "@/libs/error/supabase";
-import { signUpFormValues } from "@/schemas/auth/signup";
-import { createClient } from "@/utils/supabase/server";
+import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
+import { signUpFormValues } from "@/auth/schemas/signup";
+import { createClient } from "@/supabase/clients/server";
 import { redirect } from "next/navigation";
 
 type RegisterFormResult = {

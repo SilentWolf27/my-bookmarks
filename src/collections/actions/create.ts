@@ -1,8 +1,8 @@
 "use server";
 
-import { buildErrorFromSupabase } from "@/libs/error/supabase";
-import { CollectionFormValues } from "@/schemas/collections/create";
-import { createClient } from "@/utils/supabase/server";
+import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
+import { CollectionFormValues } from "@/collections/schemas/create";
+import { createClient } from "@/supabase/clients/server";
 
 interface CreateCollectionResponse {
   error: Error | null;

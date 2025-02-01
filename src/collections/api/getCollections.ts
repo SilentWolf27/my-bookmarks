@@ -1,5 +1,5 @@
 import { Collection } from "@/collections/interfaces/Collections";
-import { buildErrorFromSupabase } from "@/libs/error/supabase";
+import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function getCollections(

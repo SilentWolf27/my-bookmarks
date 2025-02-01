@@ -4,7 +4,7 @@ import { createCollection } from "@/collections/actions/create";
 import {
   CollectionFormValues,
   createCollectionSchema,
-} from "@/schemas/collections/create";
+} from "@/collections/schemas/create";
 import { LoadingOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";

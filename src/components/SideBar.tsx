@@ -2,8 +2,8 @@ import { signOut } from "@/auth/actions/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import CollectionsNav from "../collections/components/CollectionsNav";
-import { createClient } from "@/utils/supabase/server";
-import { getCollections } from "@/webServices/collections/getCollections";
+import { createClient } from "@/supabase/clients/server";
+import { getCollections } from "@/collections/api/getCollections";
 
 export async function SideBar() {
   const supabase = await createClient();

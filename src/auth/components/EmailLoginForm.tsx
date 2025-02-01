@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import {
   emailSignInFormValues,
   emailSignInSchema,
-} from "@/schemas/auth/signIn";
+} from "@/auth/schemas/signIn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { emailSignIn } from "@/auth/actions/emailSignIn";
 import { FocusEventHandler, useState } from "react";
