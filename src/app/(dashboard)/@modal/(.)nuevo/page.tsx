@@ -1,10 +1,10 @@
 "use client";
 
-import Modal from "@/components/common/Modal/Modal";
-import ModalHeader from "@/components/common/Modal/ModalHeader";
-import CollectionForm from "@/components/collections/CollectionForm";
-import SelectItemType from "@/components/Items/ItemType";
-import { ItemType } from "@/interfaces/Item";
+import Modal from "@/components/Modal/Modal";
+import ModalHeader from "@/components/Modal/ModalHeader";
+import CollectionForm from "@/collections/components/CollectionForm";
+import SelectItemType from "@/items/components/ItemType";
+import { ItemType } from "@/items/interfaces/Item";
 import {
   ArrowLeftOutlined,
   FolderOpenOutlined,

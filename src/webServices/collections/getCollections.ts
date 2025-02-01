@@ -1,4 +1,4 @@
-import { Collection } from "@/interfaces/Collections";
+import { Collection } from "@/collections/interfaces/Collections";
 import { buildErrorFromSupabase } from "@/libs/error/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 

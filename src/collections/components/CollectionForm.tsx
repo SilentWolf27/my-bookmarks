@@ -1,6 +1,6 @@
 "use client";
 
-import { createCollection } from "@/actions/collections/create";
+import { createCollection } from "@/collections/actions/create";
 import {
   CollectionFormValues,
   createCollectionSchema,

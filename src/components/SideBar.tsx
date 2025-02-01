@@ -1,7 +1,7 @@
 import { signOut } from "@/auth/actions/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import CollectionsNav from "../collections/CollectionsNav";
+import CollectionsNav from "../collections/components/CollectionsNav";
 import { createClient } from "@/utils/supabase/server";
 import { getCollections } from "@/webServices/collections/getCollections";
 

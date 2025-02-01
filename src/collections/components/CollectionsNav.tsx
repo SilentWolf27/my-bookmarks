@@ -1,4 +1,4 @@
-import { Collection } from "@/interfaces/Collections";
+import { Collection } from "@/collections/interfaces/Collections";
 
 interface Props {
   collections: Collection[];
