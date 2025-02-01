@@ -1,10 +1,17 @@
 import { signOut } from "@/actions/auth/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import CollectionsNav from "../collections/CollectionsNav";
+import { createClient } from "@/utils/supabase/server";
+import { getCollections } from "@/webServices/collections/getCollections";
 
-export function SideBar() {
+export async function SideBar() {
+  const supabase = await createClient();
+  const collections = await getCollections(supabase);
+  console.log(collections);
+
   return (
-    <aside className="min-w-[300px] w-[18%] max-w-[420px] px-6 py-8 bg-background text-primary-font flex flex-col justify-between">
+    <aside className="min-w-[300px] w-[18%] max-w-[420px] px-6 py-8 bg-background text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden">
       <article>
         <div className="flex justify-between items-center">
           <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
@@ -15,6 +22,8 @@ export function SideBar() {
           </Link>
         </div>
       </article>
+
+      <CollectionsNav collections={collections} />
       <form action={signOut}>
         <button
           type="submit"

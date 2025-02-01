@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function NewItemPage() {
-  return <h1>Nuevo</h1>;
+  redirect("/inicio");
 }
