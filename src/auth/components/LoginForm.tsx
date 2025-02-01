@@ -2,7 +2,7 @@ import { EmailLoginForm } from "./EmailLoginForm";
 import { GithubFilled } from "@ant-design/icons";
 import { SocialLoginForm } from "./SocialLoginForm";
 import Link from "next/link";
-import { SignInWithGithub } from "@/actions/auth/github";
+import { SignInWithGithub } from "@/auth/actions/github";
 
 export function LoginForm() {
   return (

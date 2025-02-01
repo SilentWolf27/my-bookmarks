@@ -1,6 +1,6 @@
 "use client";
 
-import { emailSignUp } from "@/actions/auth/emailSignUp";
+import { emailSignUp } from "@/auth/actions/emailSignUp";
 import { signUpSchema, signUpFormValues } from "@/schemas/auth/signup";
 import { LoadingOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";

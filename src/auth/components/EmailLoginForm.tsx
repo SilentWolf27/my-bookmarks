@@ -6,7 +6,7 @@ import {
   emailSignInSchema,
 } from "@/schemas/auth/signIn";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { emailSignIn } from "@/actions/auth/emailSignIn";
+import { emailSignIn } from "@/auth/actions/emailSignIn";
 import { FocusEventHandler, useState } from "react";
 import {
   EyeInvisibleOutlined,

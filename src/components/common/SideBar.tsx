@@ -1,4 +1,4 @@
-import { signOut } from "@/actions/auth/signOut";
+import { signOut } from "@/auth/actions/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import CollectionsNav from "../collections/CollectionsNav";
