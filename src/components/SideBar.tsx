@@ -2,14 +2,10 @@ import { signOut } from "@/auth/actions/signOut";
 import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import CollectionsNav from "../collections/components/CollectionsNav";
-import { createClient } from "@/supabase/clients/server";
-import { getCollections } from "@/collections/api/getCollections";
+import { Suspense } from "react";
+import CollectionsNavSkeleton from "@/collections/components/CollectionsNavSkeleton";
 
 export async function SideBar() {
-  const supabase = await createClient();
-  const collections = await getCollections(supabase);
-  console.log(collections);
-
   return (
     <aside className="min-w-[300px] w-[18%] max-w-[420px] px-6 py-8 bg-background text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden">
       <article>
@@ -23,7 +19,9 @@ export async function SideBar() {
         </div>
       </article>
 
-      <CollectionsNav collections={collections} />
+      <Suspense fallback={<CollectionsNavSkeleton />}>
+        <CollectionsNav />
+      </Suspense>
       <form action={signOut}>
         <button
           type="submit"
