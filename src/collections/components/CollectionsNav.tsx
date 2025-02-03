@@ -1,9 +1,16 @@
-import { Collection } from "@/collections/interfaces/Collections";
+import { createClient } from "@/supabase/clients/server";
+import { getCollections } from "../api/getCollections";
+import CollectionNavItem from "./CollectionNavItem";
 
-interface Props {
-  collections: Collection[];
-}
+export default async function CollectionsNav() {
+  const supabase = await createClient();
+  const collections = await getCollections(supabase);
 
-export default async function CollectionsNav({ collections }: Props) {
-  return <div className="h-full max-h-full overflow-y-auto"></div>;
+  return (
+    <div className="h-full max-h-full overflow-y-auto">
+      {collections.map((collection) => (
+        <CollectionNavItem key={collection.id} collection={collection} />
+      ))}
+    </div>
+  );
 }
