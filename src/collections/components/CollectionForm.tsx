@@ -29,12 +29,12 @@ export default function CollectionForm({ onClose }: Props) {
   const onSubmit = async (data: CollectionFormValues) => {
     const response = await createCollection(data);
 
-    if (response.error) {
+    if (response && response.error) {
       setError("root", { message: response.error.message });
       return;
     }
 
-    if (onClose) onClose();
+    if (onClose) return onClose();
     redirect("/inicio");
   };
 
