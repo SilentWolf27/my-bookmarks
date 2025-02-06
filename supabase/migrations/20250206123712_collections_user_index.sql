@@ -1,0 +1,1 @@
+create index "collections_user_id" on public.collections using  btree (user_id);
