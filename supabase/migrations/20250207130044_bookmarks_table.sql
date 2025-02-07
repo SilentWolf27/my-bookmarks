@@ -8,8 +8,8 @@ create table if not exists bookmarks (
     collection_id bigint references collections(id),
     is_archived boolean default false,
     is_favorite boolean default false,
-    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
-    deleted_at timestamp with time zone
+    created_at timestamp default timezone('utc'::text, now()) not null,
+    deleted_at timestamp
 );
 
 create index "bookmarks_title" on public.bookmarks using  btree (title);

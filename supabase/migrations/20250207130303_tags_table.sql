@@ -2,8 +2,8 @@ create table if not exists tags (
     id bigint primary key generated always as identity,
     name text not null,
     bookmark_id bigint references bookmarks(id),
-    created_at timestamp with time zone default timezone('utc'::text, now()) not null,
-    deleted_at timestamp with time zone
+    created_at timestamp default timezone('utc'::text, now()) not null,
+    deleted_at timestamp
 );
 
 create index "tags_name" on public.tags using  btree (name);
