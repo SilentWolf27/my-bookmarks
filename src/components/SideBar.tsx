@@ -8,7 +8,7 @@ import CollectionsNavSkeleton from "@/collections/components/CollectionsNavSkele
 export async function SideBar() {
   return (
     <aside className="min-w-[300px] w-[18%] max-w-[420px] px-6 py-8 bg-background text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden">
-      <article>
+      <article className="mb-4">
         <div className="flex justify-between items-center">
           <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
           <Link
