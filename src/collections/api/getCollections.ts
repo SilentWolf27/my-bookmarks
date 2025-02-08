@@ -8,7 +8,7 @@ export async function getCollections(
   const { data, error } = await supabase
     .from("collections")
     .select("id, name, description")
-    .eq("is_archived", false)
+    .is("deleted_at", null)
     .returns<Collection[]>();
 
   if (error) throw buildErrorFromSupabase(error);

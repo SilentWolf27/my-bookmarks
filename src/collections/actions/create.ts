@@ -1,7 +1,7 @@
 "use server";
 
 import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
-import { CollectionFormValues } from "@/collections/schemas/create";
+import { CreateCollectionFormValues } from "@/collections/schemas";
 import { createClient } from "@/supabase/clients/server";
 import { revalidatePath } from "next/cache";
 
@@ -10,7 +10,7 @@ interface CreateCollectionResponse {
 }
 
 export async function createCollection(
-  data: CollectionFormValues
+  data: CreateCollectionFormValues
 ): Promise<CreateCollectionResponse | void> {
   try {
     const supabase = await createClient();

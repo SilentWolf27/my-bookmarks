@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import BookmarksForm from "@/bookmarks/components/BookmarksForm";
 
 export default function NewItemPage() {
   const router = useRouter();
@@ -48,6 +49,10 @@ export default function NewItemPage() {
 
         {itemType === ItemType.Collection && (
           <CollectionForm onClose={closeModal} />
+        )}
+
+        {itemType === ItemType.Bookmark && (
+          <BookmarksForm onClose={closeModal} />
         )}
       </div>
     </Modal>

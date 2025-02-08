@@ -2,9 +2,9 @@
 
 import { createCollection } from "@/collections/actions/create";
 import {
-  CollectionFormValues,
-  createCollectionSchema,
-} from "@/collections/schemas/create";
+  CreateCollectionFormValues,
+  CreateCollectionSchema,
+} from "@/collections/schemas";
 import { LoadingOutlined } from "@ant-design/icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect } from "next/navigation";
@@ -22,11 +22,11 @@ export default function CollectionForm({ onClose }: Props) {
     trigger,
     setError,
     formState: { errors: formErrors, isSubmitting },
-  } = useForm<CollectionFormValues>({
-    resolver: zodResolver(createCollectionSchema),
+  } = useForm<CreateCollectionFormValues>({
+    resolver: zodResolver(CreateCollectionSchema),
   });
 
-  const onSubmit = async (data: CollectionFormValues) => {
+  const onSubmit = async (data: CreateCollectionFormValues) => {
     const response = await createCollection(data);
 
     if (response && response.error) {
@@ -39,7 +39,7 @@ export default function CollectionForm({ onClose }: Props) {
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = async ({ target }) => {
-    const name = target.name as keyof CollectionFormValues;
+    const name = target.name as keyof CreateCollectionFormValues;
     await trigger(name);
   };
 

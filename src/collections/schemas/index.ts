@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-export const createCollectionSchema = z.object({
+export const CreateCollectionSchema = z.object({
   name: z.string().nonempty({ message: "El nombre es requerido" }),
   description: z.string().optional(),
 });
 
-export type CollectionFormValues = z.infer<typeof createCollectionSchema>;
+export type CreateCollectionFormValues = z.infer<typeof CreateCollectionSchema>;
