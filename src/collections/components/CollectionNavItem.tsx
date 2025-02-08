@@ -19,11 +19,11 @@ export default function CollectionNavItem({ collection }: Props) {
   const currentPath = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const isActive = currentPath.startsWith(`/colecciones/${collection.id}`);
+  const isActive = currentPath === `/colecciones/${collection.id}`;
   return (
     <li
-      className={`flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 rounded-md transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group ${
-        isActive ? "bg-blue-200" : ""
+      className={`flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group ${
+        isActive ? "bg-gray-200" : ""
       }`}>
       <Link
         href={`/colecciones/${collection.id}`}
