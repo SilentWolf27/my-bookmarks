@@ -1,9 +1,15 @@
 "use client";
 
 import CollectionNavItem from "./CollectionNavItem";
-import { PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Collection } from "../interfaces/Collections";
-import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  KeyboardEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Props {
   collections: Collection[];
@@ -12,6 +18,7 @@ interface Props {
 export default function CollectionsNav({ collections }: Props) {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const newCollectionInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (isAdding) {
@@ -21,6 +28,18 @@ export default function CollectionsNav({ collections }: Props) {
 
   const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if (event.key == "Escape") setIsAdding(false);
+  };
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const newCollectionName = formData.get("newCollection");
+
+    if (!newCollectionName) return setIsAdding(false);
+
+    setIsLoading(true);
+    console.log(newCollectionName);
+    setIsLoading(false);
   };
 
   return (
@@ -35,22 +54,32 @@ export default function CollectionsNav({ collections }: Props) {
           </button>
         </div>
       </article>
-      <div className="h-full max-h-full overflow-y-auto flex flex-col gap-1">
+      <ul className="h-full max-h-full overflow-y-auto flex flex-col gap-1">
         {isAdding ? (
-          <form className="flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group bg-gray-200 relative">
-            <PlusOutlined className="text-xs absolute left-4" />
-            <input
-              ref={newCollectionInputRef}
-              className="w-full h- full  px-10 py-1 flex items-center gap-2 bg-transparent"
-              placeholder="Nueva colección"
-              onKeyUp={handleKeyUp}
-            />
-          </form>
+          <li>
+            <form
+              className="flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group bg-gray-200 relative"
+              onSubmit={handleSubmit}>
+              {isLoading ? (
+                <LoadingOutlined className="text-xs absolute left-4" />
+              ) : (
+                <PlusOutlined className="text-xs absolute left-4" />
+              )}
+              <input
+                ref={newCollectionInputRef}
+                type="text"
+                name="newCollection"
+                className="w-full h- full  px-10 py-1 flex items-center gap-2 bg-transparent"
+                placeholder="Nueva colección"
+                onKeyUp={handleKeyUp}
+              />
+            </form>
+          </li>
         ) : null}
         {collections.map((collection) => (
           <CollectionNavItem key={collection.id} collection={collection} />
         ))}
-      </div>
+      </ul>
     </>
   );
 }
