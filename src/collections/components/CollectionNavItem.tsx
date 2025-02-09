@@ -13,10 +13,10 @@ import { useState } from "react";
 
 interface Props {
   collection: Collection;
+  currentPath: string;
 }
 
-export default function CollectionNavItem({ collection }: Props) {
-  const currentPath = usePathname();
+export default function CollectionNavItem({ collection, currentPath }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const isActive = currentPath === `/colecciones/${collection.id}`;

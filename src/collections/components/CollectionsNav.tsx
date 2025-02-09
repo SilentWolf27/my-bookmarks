@@ -1,10 +1,12 @@
 "use client";
 
 import CollectionNavItem from "./CollectionNavItem";
-import { PlusOutlined } from "@ant-design/icons";
+import { HomeOutlined, PlusOutlined } from "@ant-design/icons";
 import { Collection } from "../interfaces/Collections";
 import { useEffect, useRef, useState } from "react";
 import { NewCollectionInput } from "./NewCollectionInput";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Props {
   collections: Collection[];
@@ -13,6 +15,7 @@ interface Props {
 export default function CollectionsNav({ collections }: Props) {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const newCollectionInputRef = useRef<HTMLInputElement | null>(null);
+  const currentPath = usePathname();
 
   useEffect(() => {
     if (isAdding) newCollectionInputRef.current?.focus();
@@ -31,6 +34,18 @@ export default function CollectionsNav({ collections }: Props) {
         </div>
       </article>
       <ul className="h-full max-h-full overflow-y-auto flex flex-col gap-1">
+        <li
+          className={`flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group hover:text-primary-font ${
+            currentPath === "/inicio" ? "bg-gray-200" : ""
+          }`}>
+          <Link
+            href="/inicio"
+            className="w-full h- full  px-4 py-1 flex items-center gap-2">
+            <HomeOutlined className="text-lg" />
+            <span>Inicio</span>
+          </Link>
+        </li>
+
         {isAdding && (
           <li>
             <NewCollectionInput
@@ -40,7 +55,11 @@ export default function CollectionsNav({ collections }: Props) {
           </li>
         )}
         {collections.map((collection) => (
-          <CollectionNavItem key={collection.id} collection={collection} />
+          <CollectionNavItem
+            key={collection.id}
+            collection={collection}
+            currentPath={currentPath}
+          />
         ))}
       </ul>
     </>
