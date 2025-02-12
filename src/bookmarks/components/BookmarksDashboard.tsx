@@ -6,12 +6,15 @@ import FastCreateBookmarkButton from "./FastCreateBookmarkButton";
 
 interface Props {
   bookmarks: Bookmark[];
+  collectionId?: string;
 }
 
-export default function BookmarksDashboard({ bookmarks }: Props) {
+export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
   const handleSearch = (search: string) => {
     console.log(search);
   };
+
+  console.log(bookmarks);
 
   return (
     <>
@@ -20,7 +23,7 @@ export default function BookmarksDashboard({ bookmarks }: Props) {
           className="w-[300px] py-1 px-3 rounded-md bg-white"
           onChange={handleSearch}
         />
-        <FastCreateBookmarkButton />
+        <FastCreateBookmarkButton collectionId={collectionId} />
       </div>
     </>
   );

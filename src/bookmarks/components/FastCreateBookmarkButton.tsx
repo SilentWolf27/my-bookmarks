@@ -1,11 +1,22 @@
 "use client";
 
-import { PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { createBookmark } from "../actions/create";
 
-export default function FastCreateBookmarkButton() {
+interface Props {
+  collectionId?: string;
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+}
+
+export default function FastCreateBookmarkButton({
+  collectionId,
+  onSuccess,
+  onError,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -31,8 +42,16 @@ export default function FastCreateBookmarkButton() {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get("url") as string;
-    await createBookmark(url);
+    setIsLoading(true);
     setIsOpen(false);
+    try {
+      await createBookmark(url, collectionId);
+      onSuccess?.();
+    } catch (error) {
+      onError?.(error as Error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,7 +61,7 @@ export default function FastCreateBookmarkButton() {
         className="bg-blue-500 text-sm text-white rounded-md flex items-center gap-2 px-2 py-1"
         onClick={() => setIsOpen(!isOpen)}>
         Nuevo
-        <PlusOutlined />
+        {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
       </button>
 
       {isOpen && (
