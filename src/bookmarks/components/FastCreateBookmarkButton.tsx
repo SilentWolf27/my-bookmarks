@@ -1,7 +1,8 @@
 "use client";
 
 import { PlusOutlined } from "@ant-design/icons";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { createBookmark } from "../actions/create";
 
 export default function FastCreateBookmarkButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,11 +27,11 @@ export default function FastCreateBookmarkButton() {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get("url") as string;
-    console.log(url);
+    await createBookmark(url);
     setIsOpen(false);
   };
 
