@@ -10,11 +10,7 @@ interface Props {
 }
 
 export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
-  const handleSearch = (search: string) => {
-    console.log(search);
-  };
-
-  console.log(bookmarks);
+  const handleSearch = (search: string) => {};
 
   return (
     <>
