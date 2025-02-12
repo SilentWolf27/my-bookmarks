@@ -1,5 +1,5 @@
 import { queryBookmarks } from "@/bookmarks/api/queryBookmarks";
-import BookmarksDashboard from "@/bookmarks/components/BookmarksDashboard";
+import BookmarksDashboard from "@/bookmarks/templates/BookmarksDashboard";
 import { getCollection } from "@/collections/api/getOne";
 import { createClient } from "@/supabase/clients/server";
 
