@@ -15,7 +15,7 @@ export default async function CollectionPage({ params }: Props) {
     getCollection(id, supabase),
     queryBookmarks(supabase, { collectionId: id }),
   ]);
-
+  
   return (
     <section className="p-8">
       <article className="mb-8">
