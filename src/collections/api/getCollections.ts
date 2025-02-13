@@ -7,11 +7,11 @@ export async function getCollections(
 ): Promise<Collection[]> {
   const { data, error } = await supabase
     .from("collections")
-    .select("id, name, description")
+    .select("id, name, description, bookmarks(id, title, url)")
     .is("deleted_at", null)
     .returns<Collection[]>();
 
-  if (error) throw buildErrorFromSupabase(error);
+  if (error) throw buildErrorFromSupabase(error.code);
 
   return data;
 }
