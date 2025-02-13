@@ -27,7 +27,7 @@ export default function CollectionsNav({ collections }: Props) {
         <div className="flex justify-between items-center">
           <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
           <button
-            className="flex justify-center items-center bg-zinc-300 px-2 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-sm"
+            className="flex justify-center items-center bg-zinc-300 px-2 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-xs"
             onClick={() => setIsAdding(true)}>
             <PlusOutlined className="text-sm" />
           </button>

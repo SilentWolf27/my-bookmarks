@@ -7,7 +7,7 @@ interface Props {
 
 export default function BookmarkCard({ bookmark }: Props) {
   return (
-    <article className="flex gap-4 flex-col relative rounded-sm overflow-hidden bg-white text-primary-font">
+    <article className="flex gap-4 flex-col relative rounded-xs overflow-hidden bg-white text-primary-font">
       <div className="w-full h-[120px] bg-gray-900/10">
         {bookmark.image && (
           <Image

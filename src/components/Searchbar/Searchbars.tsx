@@ -36,7 +36,7 @@ export default function Searchbar({
       />
 
       <button
-        className="bg-transparent border-none outline-none absolute right-2 top-0 bottom-0"
+        className="bg-transparent border-none outline-hidden absolute right-2 top-0 bottom-0"
         type="submit">
         <SearchOutlined />
       </button>

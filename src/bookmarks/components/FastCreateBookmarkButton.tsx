@@ -66,7 +66,7 @@ export default function FastCreateBookmarkButton({
 
       {isOpen && (
         <form
-          className="absolute top-[calc(100%+10px)] right-0 bg-white rounded-sm"
+          className="absolute top-[calc(100%+10px)] right-0 bg-white rounded-xs"
           onSubmit={handleSubmit}>
           <input
             type="text"
