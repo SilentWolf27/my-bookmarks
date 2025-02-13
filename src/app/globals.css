@@ -1,9 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary-font: var(--primary-font);
+  --color-background: #f9fafb;
+  --color-foreground: #ffffff;
+  --color-primary-font: #0b1215;
 }
 
 @layer base {
@@ -16,23 +16,7 @@
   }
 }
 
-:root {
-  --background: #f9fafb;
-  --foreground: #ffffff;
-  --primary-font: #0b1215;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
   }
-}
-
-body {
-  color: var(--primary-font);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.field-sizing-content {
-  field-sizing: content;
 }

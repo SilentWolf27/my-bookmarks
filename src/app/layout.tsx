@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="w-dvh h-dvh">{children}</body>
+      <body className="w-dvw h-dvh bg-background text-primary-font">{children}</body>
     </html>
   );
 }
