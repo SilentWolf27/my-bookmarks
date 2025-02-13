@@ -17,7 +17,7 @@ export default async function CollectionPage({ params }: Props) {
   ]);
   
   return (
-    <section className="p-8">
+    <section className="p-8 max-w-screen-2xl">
       <article className="mb-8">
         <h2 className="text-lg font-bold"> {collection.name} </h2>
         <p className="text-sm text-gray-500"> {collection.description} </p>

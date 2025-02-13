@@ -17,13 +17,13 @@ export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
     <>
       <section className="flex justify-end items-center gap-2">
         <Searchbar
-          className="w-[300px] py-1 px-3 rounded-md bg-white"
+          className="w-full max-w-[300px] py-1 px-3 rounded-md bg-white"
           onChange={handleSearch}
         />
         <FastCreateBookmarkButton collectionId={collectionId} />
       </section>
 
-      <section className="mt-8">
+      <section className="w-full mt-12 grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-5">
         {bookmarks.map((bookmark) => (
           <BookmarkCard key={bookmark.id} bookmark={bookmark} />
         ))}

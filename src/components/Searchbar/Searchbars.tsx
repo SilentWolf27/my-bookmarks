@@ -26,7 +26,7 @@ export default function Searchbar({
   };
 
   return (
-    <form className="relative" onSubmit={handleSubmit}>
+    <form className="relative w-full flex justify-end" onSubmit={handleSubmit}>
       <input
         className={`${className}`}
         type="text"
