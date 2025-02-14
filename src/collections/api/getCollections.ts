@@ -7,7 +7,7 @@ export async function getCollections(
 ): Promise<Collection[]> {
   const { data, error } = await supabase
     .from("collections")
-    .select("id, name, description, bookmarks(id, title, url)")
+    .select("id, name, description, bookmarks(id, title, url, collection_id)")
     .is("deleted_at", null)
     .returns<Collection[]>();
 

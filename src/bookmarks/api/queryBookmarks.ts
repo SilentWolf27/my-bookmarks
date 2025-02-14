@@ -13,8 +13,7 @@ export async function queryBookmarks(
 ): Promise<Bookmark[]> {
   const query = supabase
     .from("bookmarks")
-
-    .select("id, title, url, description");
+    .select("id, title, url, description, collection_id");
 
   if (filters.collectionId) query.eq("collection_id", filters.collectionId);
   if (filters.search) query.like("title", `%${filters.search}%`);
@@ -24,6 +23,5 @@ export async function queryBookmarks(
   if (error) buildErrorFromSupabase(error);
 
   if (!data) return [];
-
   return data;
 }

@@ -74,6 +74,7 @@ export default function FastCreateBookmarkButton({
             name="url"
             autoFocus
             className="outline-blue-500 text-sm px-2 py-1"
+            autoComplete="off"
           />
         </form>
       )}
