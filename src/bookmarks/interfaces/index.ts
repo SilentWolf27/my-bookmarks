@@ -5,4 +5,5 @@ export interface Bookmark {
     description: string | null;
     collection_id: string | null;
     image: string | null;
+    is_favorite: boolean;
 }
