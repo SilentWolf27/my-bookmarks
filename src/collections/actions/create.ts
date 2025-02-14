@@ -20,7 +20,7 @@ export async function createCollection(
 
     if (error) return { error: buildErrorFromSupabase(error) };
 
-    return revalidatePath("/");
+    return revalidatePath("/", "layout");
   } catch (error) {
     return {
       error: new Error(
