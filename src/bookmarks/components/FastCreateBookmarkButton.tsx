@@ -58,7 +58,7 @@ export default function FastCreateBookmarkButton({
     <div className="relative">
       <button
         id="fast-create-bookmark-button"
-        className="bg-blue-500 text-sm text-white rounded-md flex items-center gap-2 px-2 py-1"
+        className="bg-blue-600 text-sm text-white rounded-md flex items-center gap-2 px-2 py-1"
         onClick={() => setIsOpen(!isOpen)}>
         Nuevo
         {isLoading ? <LoadingOutlined /> : <PlusOutlined />}

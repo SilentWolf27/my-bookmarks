@@ -10,7 +10,7 @@ export async function SideBar() {
   const collections = await getCollections(supabase);
 
   return (
-    <aside className="min-w-[300px] w-[18%] max-w-[420px] py-8 bg-background text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden bg-white rounded-md">
+    <aside className="min-w-[300px] w-[18%] max-w-[420px] py-8 text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden bg-white rounded-md">
       <CollectionsNav collections={collections} />
       <form action={signOut}>
         <button
