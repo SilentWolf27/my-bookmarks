@@ -23,11 +23,21 @@ export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
         <FastCreateBookmarkButton collectionId={collectionId} />
       </section>
 
-      <section className="w-full mt-12 grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-5">
-        {bookmarks.map((bookmark) => (
-          <BookmarkCard key={bookmark.id} bookmark={bookmark} />
-        ))}
-      </section>
+      {bookmarks.length > 0 ? (
+        <section className="w-full mt-12 grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-5">
+          {bookmarks.map((bookmark) => (
+            <BookmarkCard key={bookmark.id} bookmark={bookmark} />
+          ))}
+        </section>
+      ) : (
+        <section className="w-full mt-20 text-lg text-gray-600 text-center ">
+          <p>Tus marcadores aparecerán aquí</p>
+          <p>
+            Guarda tu primer marcador y accede fácilmente a tus enlaces
+            favoritos
+          </p>
+        </section>
+      )}
     </>
   );
 }
