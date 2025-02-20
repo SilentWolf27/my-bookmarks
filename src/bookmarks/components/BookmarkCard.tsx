@@ -11,16 +11,24 @@ import {
 import Link from "next/link";
 import { setFavorite } from "../actions/setFavorite";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 interface Props {
   bookmark: Bookmark;
 }
 
 export default function BookmarkCard({ bookmark }: Props) {
   const [isFavorite, setIsFavorite] = useState(bookmark.is_favorite);
+  const router = useRouter();
 
   const handleSetFavorite = async () => {
     await setFavorite(bookmark.id, !isFavorite);
     setIsFavorite(!isFavorite);
+  };
+
+  const redirectToDetail = () => {
+    router.push(
+      `/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}`
+    );
   };
 
   return (
@@ -40,13 +48,14 @@ export default function BookmarkCard({ bookmark }: Props) {
           {bookmark.title || bookmark.url}
         </h3>
       </div>
-      <div className="absolute hidden group-hover:block inset-0 bg-black/20 py-2 px-4">
+      <div
+        className="absolute hidden group-hover:block inset-0 bg-black/20 py-2 px-4 cursor-pointer"
+        role="button"
+        onClick={redirectToDetail}>
         <div className="flex gap-4 justify-end">
-          <Link
-            href={`/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}/editar`}
-            className="cursor-pointer hover:scale-120 transition-[scale] duration-350">
+          <button className="cursor-pointer hover:scale-125 transition-[scale] duration-350">
             <EditOutlined />
-          </Link>
+          </button>
           <button
             className={`cursor-pointer hover:scale-125 transition-[scale] duration-350 ${
               isFavorite ? "text-amber-400" : ""
