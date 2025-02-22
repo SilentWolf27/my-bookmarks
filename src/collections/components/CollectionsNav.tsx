@@ -3,7 +3,7 @@
 import CollectionNavItem from "./CollectionNavItem";
 import { HomeOutlined, PlusOutlined } from "@ant-design/icons";
 import { Collection } from "../interfaces/Collections";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { NewCollectionInput } from "./NewCollectionInput";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,12 +14,7 @@ interface Props {
 
 export default function CollectionsNav({ collections }: Props) {
   const [isAdding, setIsAdding] = useState<boolean>(false);
-  const newCollectionInputRef = useRef<HTMLInputElement | null>(null);
   const currentPath = usePathname();
-
-  useEffect(() => {
-    if (isAdding) newCollectionInputRef.current?.focus();
-  }, [isAdding]);
 
   return (
     <>
@@ -48,10 +43,7 @@ export default function CollectionsNav({ collections }: Props) {
 
         {isAdding && (
           <li>
-            <NewCollectionInput
-              onClose={() => setIsAdding(false)}
-              ref={newCollectionInputRef}
-            />
+            <NewCollectionInput onClose={() => setIsAdding(false)} />
           </li>
         )}
         {collections.map((collection) => (
