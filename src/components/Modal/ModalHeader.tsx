@@ -14,7 +14,10 @@ export default function ModalHeader({ children, onClose, className }: Props) {
         children ? "justify-between" : "justify-end"
       } ${className}`}>
       {children}
-      <button type="button" onClick={onClose}>
+      <button
+        className="cursor-pointer hover:scale-105 transition-[scale] duration-200"
+        type="button"
+        onClick={onClose}>
         <CloseOutlined />
       </button>
     </div>

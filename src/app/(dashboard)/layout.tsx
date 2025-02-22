@@ -2,10 +2,8 @@ import { SideBar } from "@/components/SideBar";
 
 export default function DashboardLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <>
@@ -13,7 +11,6 @@ export default function DashboardLayout({
         <SideBar />
         <main className="w-full">{children}</main>
       </div>
-      {modal}
     </>
   );
 }
