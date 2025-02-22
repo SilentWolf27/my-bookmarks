@@ -10,11 +10,14 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { setFavorite } from "../actions/setFavorite";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 interface Props {
   bookmark: Bookmark;
 }
+
+const actionIds = ["edit", "favorite", "open"] as const;
+type actionIds = (typeof actionIds)[number];
 
 export default function BookmarkCard({ bookmark }: Props) {
   const [isFavorite, setIsFavorite] = useState(bookmark.is_favorite);
@@ -25,7 +28,11 @@ export default function BookmarkCard({ bookmark }: Props) {
     setIsFavorite(!isFavorite);
   };
 
-  const redirectToDetail = () => {
+  const redirectToDetail: MouseEventHandler<HTMLElement> = ({
+    currentTarget,
+  }) => {
+    if (actionIds.includes(currentTarget.id as actionIds)) return;
+
     router.push(
       `/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}`
     );
@@ -53,10 +60,13 @@ export default function BookmarkCard({ bookmark }: Props) {
         role="button"
         onClick={redirectToDetail}>
         <div className="flex gap-4 justify-end">
-          <button className="cursor-pointer hover:scale-125 transition-[scale] duration-350">
+          <button
+            className="cursor-pointer hover:scale-125 transition-[scale] duration-350"
+            id="edit">
             <EditOutlined />
           </button>
           <button
+            id="favorite"
             className={`cursor-pointer hover:scale-125 transition-[scale] duration-350 ${
               isFavorite ? "text-amber-400" : ""
             }`}
@@ -64,6 +74,7 @@ export default function BookmarkCard({ bookmark }: Props) {
             {isFavorite ? <StarFilled /> : <StarOutlined />}
           </button>
           <Link
+            id="open"
             href={bookmark.url}
             className="cursor-pointer hover:scale-120 transition-[scale] duration-350"
             target="_blank">
