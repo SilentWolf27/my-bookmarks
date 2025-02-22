@@ -16,9 +16,6 @@ interface Props {
   bookmark: Bookmark;
 }
 
-const actionIds = ["edit", "favorite", "open"] as const;
-type actionIds = (typeof actionIds)[number];
-
 export default function BookmarkCard({ bookmark }: Props) {
   const [isFavorite, setIsFavorite] = useState(bookmark.is_favorite);
   const router = useRouter();
@@ -26,16 +23,6 @@ export default function BookmarkCard({ bookmark }: Props) {
   const handleSetFavorite = async () => {
     await setFavorite(bookmark.id, !isFavorite);
     setIsFavorite(!isFavorite);
-  };
-
-  const redirectToDetail: MouseEventHandler<HTMLElement> = ({
-    currentTarget,
-  }) => {
-    if (actionIds.includes(currentTarget.id as actionIds)) return;
-
-    router.push(
-      `/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}`
-    );
   };
 
   return (
@@ -55,18 +42,14 @@ export default function BookmarkCard({ bookmark }: Props) {
           {bookmark.title || bookmark.url}
         </h3>
       </div>
-      <div
-        className="absolute hidden group-hover:block inset-0 bg-black/20 py-2 px-4 cursor-pointer"
-        role="button"
-        onClick={redirectToDetail}>
+      <div className="absolute hidden group-hover:block inset-0 bg-black/20 py-2 px-4">
         <div className="flex gap-4 justify-end">
-          <button
+          <Link
             className="cursor-pointer hover:scale-125 transition-[scale] duration-350"
-            id="edit">
+            href={`/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}/editar`}>
             <EditOutlined />
-          </button>
+          </Link>
           <button
-            id="favorite"
             className={`cursor-pointer hover:scale-125 transition-[scale] duration-350 ${
               isFavorite ? "text-amber-400" : ""
             }`}
@@ -74,8 +57,8 @@ export default function BookmarkCard({ bookmark }: Props) {
             {isFavorite ? <StarFilled /> : <StarOutlined />}
           </button>
           <Link
-            id="open"
             href={bookmark.url}
+            rel="noopener noreferrer"
             className="cursor-pointer hover:scale-120 transition-[scale] duration-350"
             target="_blank">
             <ExportOutlined />
