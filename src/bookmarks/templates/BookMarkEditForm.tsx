@@ -6,6 +6,7 @@ import Image from "next/image";
 import Modal from "@/components/Modal/Modal";
 import ModalHeader from "@/components/Modal/ModalHeader";
 import ModalOverlay from "@/components/Modal/ModalOverlay";
+import FileUploader from "@/components/form/FileUploader";
 interface Props {
   bookmark: Bookmark;
 }
@@ -44,7 +45,14 @@ export default function BookMarkEditForm({ bookmark }: Props) {
         <ModalOverlay>
           <Modal>
             <ModalHeader onClose={closeImageUploader} />
-            <div></div>
+            <div>
+              <FileUploader
+                accept="image/*"
+                onChange={(e) => {
+                  console.log(e.target.files);
+                }}
+              />
+            </div>
           </Modal>
         </ModalOverlay>
       )}
