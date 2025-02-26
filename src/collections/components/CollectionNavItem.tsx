@@ -63,7 +63,7 @@ export default function CollectionNavItem({
             <BookmarkNavItem
               key={bookmark.id}
               bookmark={bookmark}
-              className="pl-10 pr-3"
+              className={`pr-3 ${isChild ? "pl-17" : "pl-10"}`}
             />
           ))}
         </ul>
