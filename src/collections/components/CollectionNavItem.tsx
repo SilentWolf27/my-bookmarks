@@ -13,9 +13,14 @@ import BookmarkNavItem from "../../bookmarks/components/BookmarkNavItem";
 interface Props {
   collection: Collection;
   currentPath: string;
+  isChild?: boolean;
 }
 
-export default function CollectionNavItem({ collection, currentPath }: Props) {
+export default function CollectionNavItem({
+  collection,
+  currentPath,
+  isChild = false,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const isActive = currentPath === `/colecciones/${collection.id}`;
@@ -27,7 +32,9 @@ export default function CollectionNavItem({ collection, currentPath }: Props) {
         }`}>
         <Link
           href={`/colecciones/${collection.id}`}
-          className="w-full h- full  px-4 py-1 flex items-center gap-2 text-nowrap overflow-hidden text-ellipsis">
+          className={`w-full h- full  px-4 py-1 flex items-center gap-2 text-nowrap overflow-hidden text-ellipsis ${
+            isChild ? "pl-10" : ""
+          }`}>
           {isActive ? (
             <FolderOpenOutlined className="text-lg" />
           ) : (
@@ -44,8 +51,20 @@ export default function CollectionNavItem({ collection, currentPath }: Props) {
 
       {isOpen && (
         <ul className="flex flex-col gap-1 py-1">
+          {collection.collections.map((collection) => (
+            <CollectionNavItem
+              key={collection.id}
+              collection={collection}
+              currentPath={currentPath}
+              isChild={true}
+            />
+          ))}
           {collection.bookmarks.map((bookmark) => (
-            <BookmarkNavItem key={bookmark.id} bookmark={bookmark} className="pl-10 pr-3"/>
+            <BookmarkNavItem
+              key={bookmark.id}
+              bookmark={bookmark}
+              className="pl-10 pr-3"
+            />
           ))}
         </ul>
       )}
