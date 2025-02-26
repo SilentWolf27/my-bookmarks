@@ -5,10 +5,11 @@ import {
   LoadingOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { createBookmark } from "../actions/create";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import DropdownItem from "@/components/Dropdown/DropdownItem";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 interface Props {
   collectionId?: string;
@@ -23,26 +24,13 @@ export default function FastCreateBookmarkButton({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      window.addEventListener("click", handleClickOutside);
-    } else {
-      window.removeEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (event.target instanceof HTMLElement) {
-      if (!event.target.closest("#fast-create-bookmark-button")) {
-        setIsOpen(false);
-      }
-    }
-  };
+  useClickOutside({
+    ref: formRef,
+    handler: () => setIsOpen(false),
+    events: ["mousedown"] // Solo mousedown para mejor UX con el input
+  });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -85,6 +73,7 @@ export default function FastCreateBookmarkButton({
 
       {isOpen && (
         <form
+          ref={formRef}
           className="absolute top-[calc(100%+10px)] right-0 bg-white rounded-xs z-10"
           onSubmit={handleSubmit}>
           <input

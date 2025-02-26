@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { DropdownPlacement } from "./types";
 import { getDropdownStyles } from "./utils";
-import { useClickOutside } from "./hooks/useClickOutside";
+import { useClickOutside } from "@/hooks/useClickOutside";
+import { useDropdown } from "./hooks/useDropdown";
 
 interface Props {
   trigger: React.ReactNode;
@@ -18,12 +19,12 @@ export default function Dropdown({
   placement = "bottom-left",
   className,
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggle, close } = useDropdown();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useClickOutside({
     ref: dropdownRef,
-    handler: () => setIsOpen(false),
+    handler: close
   });
 
   return (
@@ -32,13 +33,15 @@ export default function Dropdown({
       ref={dropdownRef}
       aria-expanded={isOpen}
       role="menu">
-      <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
+      <div onClick={toggle}>{trigger}</div>
 
       {isOpen && (
         <div
           className={`absolute z-50 min-w-[200px] rounded-sm bg-white shadow-lg border border-gray-300 
             ${getDropdownStyles(placement)}
-            ${className}`}>
+            ${className}`}
+          onClick={close}
+          >
           {children}
         </div>
       )}
