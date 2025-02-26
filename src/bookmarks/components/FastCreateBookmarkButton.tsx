@@ -49,9 +49,8 @@ export default function FastCreateBookmarkButton({
     const formData = new FormData(event.target as HTMLFormElement);
     const url = formData.get("url") as string;
     setIsLoading(true);
-    setIsOpen(false);
     try {
-      await createBookmark(url, collectionId);
+      await createBookmark({ url, collectionId });
       onSuccess?.();
     } catch (error) {
       onError?.(error as Error);
