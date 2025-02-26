@@ -1,8 +1,14 @@
 "use client";
 
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CaretDownOutlined,
+  LoadingOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { createBookmark } from "../actions/create";
+import Dropdown from "@/components/Dropdown/Dropdown";
+import DropdownItem from "@/components/Dropdown/DropdownItem";
 
 interface Props {
   collectionId?: string;
@@ -56,13 +62,27 @@ export default function FastCreateBookmarkButton({
 
   return (
     <div className="relative">
-      <button
-        id="fast-create-bookmark-button"
-        className="bg-blue-600 text-sm text-white rounded-md flex items-center gap-2 px-2 py-1"
-        onClick={() => setIsOpen(!isOpen)}>
-        Nuevo
-        {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
-      </button>
+      <div className="flex gap-1">
+        <button
+          id="fast-create-bookmark-button"
+          className="bg-blue-600 text-sm text-white rounded-l-md flex items-center gap-2 px-2 py-1 cursor-pointer min-h-7"
+          onClick={() => setIsOpen(!isOpen)}>
+          {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
+          Nuevo
+        </button>
+
+        <Dropdown
+          trigger={
+            <button className="bg-blue-600 text-xs text-white rounded-r-md flex items-center gap-2 px-1 py-1 cursor-pointer min-h-7">
+              <CaretDownOutlined />
+            </button>
+          }
+          placement="bottom-right">
+          <DropdownItem onClick={() => console.log("Opción 1")}>
+            Importar desde archivo
+          </DropdownItem>
+        </Dropdown>
+      </div>
 
       {isOpen && (
         <form
