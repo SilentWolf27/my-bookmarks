@@ -15,7 +15,8 @@ export async function createCollection(
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("collections").insert({
-      ...data,
+      name: data.name,
+      parent_id: data.parentId,
     });
 
     if (error) return { error: buildErrorFromSupabase(error) };

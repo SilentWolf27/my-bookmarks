@@ -10,12 +10,15 @@ import { createBookmark } from "../actions/create";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import DropdownItem from "@/components/Dropdown/DropdownItem";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { createCollection } from "@/collections/actions/create";
 
 interface Props {
   collectionId?: string;
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
+
+type Action = "bookmark" | "collection";
 
 export default function FastCreateBookmarkButton({
   collectionId,
@@ -24,21 +27,24 @@ export default function FastCreateBookmarkButton({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [action, setAction] = useState<Action>("bookmark");
   const formRef = useRef<HTMLFormElement>(null);
 
   useClickOutside({
     ref: formRef,
     handler: () => setIsOpen(false),
-    events: ["mousedown"] // Solo mousedown para mejor UX con el input
+    events: ["mousedown"],
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const url = formData.get("url") as string;
+    const input = formData.get("input") as string;
     setIsLoading(true);
+    setIsOpen(false);
     try {
-      await createBookmark({ url, collectionId });
+      if (action === "bookmark") await createBookmark({ url: input, collectionId });
+      else await createCollection({ name: input, parentId: collectionId });
       onSuccess?.();
     } catch (error) {
       onError?.(error as Error);
@@ -47,13 +53,23 @@ export default function FastCreateBookmarkButton({
     }
   };
 
+  const selectCollectionAction = () => {
+    setAction("collection");
+    setIsOpen(true);
+  };
+
+  const selectBookmarkAction = () => {
+    setAction("bookmark");
+    setIsOpen(true);
+  };
+
   return (
     <div className="relative">
       <div className="flex gap-1">
         <button
           id="fast-create-bookmark-button"
           className="bg-blue-600 text-sm text-white rounded-l-md flex items-center gap-2 px-2 py-1 cursor-pointer min-h-7"
-          onClick={() => setIsOpen(!isOpen)}>
+          onClick={selectBookmarkAction}>
           {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
           Nuevo
         </button>
@@ -65,8 +81,8 @@ export default function FastCreateBookmarkButton({
             </button>
           }
           placement="bottom-right">
-          <DropdownItem onClick={() => console.log("Opción 1")}>
-            Importar desde archivo
+          <DropdownItem onClick={selectCollectionAction}>
+            Agregar colección
           </DropdownItem>
         </Dropdown>
       </div>
@@ -78,8 +94,8 @@ export default function FastCreateBookmarkButton({
           onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="URL"
-            name="url"
+            placeholder={action === "bookmark" ? "URL" : "Nombre de la colección"}
+            name="input"
             autoFocus
             className="outline-blue-500 text-sm px-2 py-1"
             autoComplete="off"
