@@ -5,6 +5,8 @@ export interface Collection {
   name: string;
   description: string;
   bookmarks: Bookmark[];
+  parentId: string;
+  collections: Collection[];
 }
 
 
