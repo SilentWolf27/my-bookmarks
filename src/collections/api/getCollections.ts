@@ -7,7 +7,7 @@ export async function getCollections(
 ): Promise<Collection[]> {
   const { data, error } = await supabase
     .from("collections")
-    .select("id, name, description, parentId:parent_id, bookmarks(id, title, url, collection_id)")
+    .select("id, name, description, parentId:parent_id")
     .is("deleted_at", null)
     .returns<Collection[]>();
 
@@ -23,16 +23,16 @@ function groupCollections(collections: Collection[]): Collection[] {
 
 function createCollectionMap(collections: Collection[]): Map<string, Collection> {
   const map = new Map<string, Collection>();
-  
+
   for (const collection of collections) {
     map.set(collection.id, { ...collection, collections: [] });
   }
-  
+
   return map;
 }
 
 function buildCollectionHierarchy(
-  collections: Collection[], 
+  collections: Collection[],
   collectionMap: Map<string, Collection>
 ): Collection[] {
   const rootCollections: Collection[] = [];

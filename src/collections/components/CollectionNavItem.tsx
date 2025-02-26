@@ -59,13 +59,13 @@ export default function CollectionNavItem({
               isChild={true}
             />
           ))}
-          {collection.bookmarks.map((bookmark) => (
+          {/* {collection.bookmarks.map((bookmark) => (
             <BookmarkNavItem
               key={bookmark.id}
               bookmark={bookmark}
               className={`pr-3 ${isChild ? "pl-17" : "pl-10"}`}
             />
-          ))}
+          ))} */}
         </ul>
       )}
     </li>
