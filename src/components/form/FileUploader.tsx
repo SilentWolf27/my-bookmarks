@@ -105,7 +105,7 @@ export default function FileUploader({
         <p
           className={`
           mt-4 text-sm
-          ${status.type === "error" ? "text-red-500" : "text-primary-font"}
+          ${status.type === "error" ? "text-red-500" : "text-green-500"}
         `}>
           {status.message}
         </p>

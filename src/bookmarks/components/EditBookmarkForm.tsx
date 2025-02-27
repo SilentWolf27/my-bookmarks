@@ -70,7 +70,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
 
       <button
         type="submit"
-        className="text-base self-end px-5 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-blue-200"
+        className="text-base self-end px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-200"
         disabled={isSubmitting}
       >
         {isSubmitting ? <LoadingOutlined /> : "Guardar"}

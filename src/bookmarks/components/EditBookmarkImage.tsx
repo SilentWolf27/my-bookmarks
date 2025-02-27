@@ -76,7 +76,7 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
                 <button
                   onClick={handleUpload}
                   disabled={!selectedFile || isUploading}
-                  className="px-4 py-2 text-sm bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed">
+                  className="px-4 py-2 text-sm bg-blue-600 text-white rounded cursor-pointer hover:bg-blue-700 disabled:bg-blue-200 disabled:cursor-not-allowed">
                   {isUploading ? <LoadingOutlined /> : "Subir imagen"}
                 </button>
               </div>
