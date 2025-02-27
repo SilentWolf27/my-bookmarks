@@ -1,6 +1,6 @@
 # MyBookmarks
 
-MyBookmarks is a simple web application designed to organize and store frequently accessed services and pages in one central location. It helps users manage and quickly access their streaming services, learning subscriptions, shopping sites, and software tools.
+MyBookmarks is a web application designed to help users organize and store frequently accessed services, tools, and pages in one central location. Whether it's streaming platforms, learning subscriptions, shopping sites, or software tools, MyBookmarks ensures quick and efficient access to your most-used resources.
 
 ## 🚀 Tech Stack
 
@@ -19,6 +19,7 @@ MyBookmarks is a simple web application designed to organize and store frequentl
 
 ```bash
 git clone https://github.com/SilentWolf27/my-bookmarks.git
+cd my-bookmarks
 ```
 
 2. Install dependencies
