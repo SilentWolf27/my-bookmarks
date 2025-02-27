@@ -5,6 +5,7 @@ export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   console.log("🚀 ~ GET ~ searchParams:", searchParams);
   console.log("🚀 ~ GET ~ origin:", origin);
+  console.log(process.env)
 
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
