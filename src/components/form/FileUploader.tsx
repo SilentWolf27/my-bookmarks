@@ -4,7 +4,7 @@ import { ChangeEventHandler, useState } from "react";
 
 interface Props {
   accept: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onFileSelected: (file: File) => void;
   children?: React.ReactNode;
   maxSize?: number;
 }
@@ -16,7 +16,7 @@ type FileStatus = {
 
 export default function FileUploader({
   accept,
-  onChange,
+  onFileSelected,
   children,
   maxSize = 5,
 }: Props) {
@@ -42,7 +42,6 @@ export default function FileUploader({
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const file = event.target.files?.[0];
     handleFile(file);
-    onChange(event);
   };
 
   const handleFile = (file: File | undefined) => {
@@ -52,8 +51,10 @@ export default function FileUploader({
 
       setStatus({
         type: "success",
-        message: `Archivo ${file.name} cargado correctamente`,
+        message: `Archivo cargado correctamente`,
       });
+
+      onFileSelected(file);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "Ocurrio un error desconocido";

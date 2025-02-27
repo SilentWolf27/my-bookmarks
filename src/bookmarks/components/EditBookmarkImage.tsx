@@ -24,18 +24,15 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
     setSelectedFile(null);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    setSelectedFile(file || null);
-  };
+  const handleFileChange = (file: File) => setSelectedFile(file);
 
   const handleUpload = async () => {
     if (!selectedFile) return;
-    
+
     setIsUploading(true);
     try {
       // TODO: Implementar lógica de subida
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulación
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulación
     } finally {
       setIsUploading(false);
       closeImageUploader();
@@ -60,9 +57,7 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
           <Modal>
             <ModalHeader onClose={closeImageUploader} />
             <div className="p-4">
-              <FileUploader
-                accept="image/*"
-                onChange={handleFileChange}>
+              <FileUploader accept="image/*" onFileSelected={handleFileChange}>
                 <div className="flex flex-col items-center gap-2 text-gray-500">
                   <FileImageOutlined className="text-3xl" />
                   <p className="text-sm">
@@ -75,16 +70,14 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
                 <button
                   onClick={closeImageUploader}
                   className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-md transition-all duration-300 cursor-pointer"
-                  disabled={isUploading}
-                >
+                  disabled={isUploading}>
                   Cancelar
                 </button>
                 <button
                   onClick={handleUpload}
                   disabled={!selectedFile || isUploading}
-                  className="px-4 py-2 text-sm bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
-                >
-                  {isUploading ? <LoadingOutlined /> : 'Subir imagen'}
+                  className="px-4 py-2 text-sm bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed">
+                  {isUploading ? <LoadingOutlined /> : "Subir imagen"}
                 </button>
               </div>
             </div>
