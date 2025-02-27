@@ -50,22 +50,25 @@ npm run dev
 
 ### Authentication:
 
-  - [X] Users can sign up and login to the application using Email/Password authentication.
-  - [X] At registration, an email is sent to the user to verify their account.
-  - [X] Users can sign in to the application using GitHub authentication.
-  - [X] Protected routes using middleware to prevent unauthenticated users from accessing certain pages or services.
+  - ✅ Email/Password authentication with account verification
+  - ✅ GitHub OAuth integration
+  - ✅ Protected routes via middleware
+  - ✅ Email verification flow
 
 ### Collections:
 
-- [X] Users can create collections to organize their bookmarks. A collection is a group of bookmarks that are related to each other.
-- [] Other CRUD operations for collections are not implemented yet.
-- [X] Users can add a child collection to a collection.
+- ✅ Create new collections
+- ✅ Nested collections support
+- 🚧 Edit collection details (In Progress)
+- 🚧 Delete collections (In Progress)
+- 🚧 Reorder collections (Planned)
 
 ### Bookmarks:
 
-  - [X] Users can add and edit bookmarks.
-  - [X] Each bookmark includes a title, URL, and description to help users identify and access the desired service or page.
-  - [X] Users can easily search for bookmarks by title to quickly find the desired link.
-  - [X] Users cand mark bookmarks as favorites to access them quickly from the main page.
-  - [] Tags are not implemented yet.
+  - ✅ Create and edit bookmarks
+  - ✅ Title, URL, and description fields
+  - ✅ Search functionality
+  - ✅ Favorite bookmarks feature
+  - 🚧 Tags system (Planned)
+  - 🚧 Bulk operations (Planned)
 
