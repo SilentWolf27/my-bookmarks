@@ -1,6 +1,12 @@
+import { Bookmark } from "@/bookmarks/interfaces";
+
 export interface Collection {
   id: string;
   name: string;
   description: string;
-  is_archived: boolean;
+  bookmarks: Bookmark[];
+  parentId: string;
+  collections: Collection[];
 }
+
+

@@ -1,1 +1,0 @@
-alter table "collections" enable row level security;

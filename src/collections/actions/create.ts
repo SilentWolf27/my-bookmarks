@@ -1,25 +1,27 @@
 "use server";
 
 import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
-import { CollectionFormValues } from "@/collections/schemas/create";
+import { CreateCollectionFormValues } from "@/collections/schemas";
 import { createClient } from "@/supabase/clients/server";
+import { revalidatePath } from "next/cache";
 
 interface CreateCollectionResponse {
   error: Error | null;
 }
 
 export async function createCollection(
-  data: CollectionFormValues
-): Promise<CreateCollectionResponse> {
+  data: CreateCollectionFormValues
+): Promise<CreateCollectionResponse | void> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("collections").insert({
-      ...data,
+      name: data.name,
+      parent_id: data.parentId,
     });
 
     if (error) return { error: buildErrorFromSupabase(error) };
 
-    return { error: null };
+    return revalidatePath("/", "layout");
   } catch (error) {
     return {
       error: new Error(

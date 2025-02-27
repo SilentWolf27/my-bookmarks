@@ -1,39 +1,74 @@
 # MyBookmarks
 
-MyBookmarks is a simple web application designed to organize and store frequently accessed services and pages in one central location. It helps users manage and quickly access their streaming services, learning subscriptions, shopping sites, and software tools.
+MyBookmarks is a web application designed to help users organize and store frequently accessed services, tools, and pages in one central location. Whether it's streaming platforms, learning subscriptions, shopping sites, or software tools, MyBookmarks ensures quick and efficient access to your most-used resources.
 
-## Features
+## 🚀 Tech Stack
 
-- Category management:
-  
-  - [] Users can create, edit, and delete categories to organize their bookmarks (e.g., streaming services, learning subscriptions, shopping sites, software tools).
-  - [] Fully customizable categories allow users to group bookmarks based on their preferences and needs.
+- **Framework**: Next.js 15 (App Router)
+- **Database**: Supabase (PostgreSQL)
+- **Auth**: Supabase Auth
+- **Styling**: Tailwind CSS
+- **Storage**: Supabase Storage
+- **Forms**: React Hook Form
+- **Validation**: Zod
+- **Hosting**: Vercel
 
-- Bookmark management:
+## 📦 Installation
 
-  - [] Users can add, edit, and delete bookmarks within each category.
-  - [] Each bookmark includes a title, URL, and description to help users identify and access the desired service or page.
-  - [] Users can easily search for bookmarks by title or description to quickly find the desired link.
-  - [] In the future, users will be able to add more details to bookmarks, such as tags, ratings, and notes, cost, or expiration date to connect with other services.
+1. Clone the repository
 
-- User-friendly navigation:
+```bash
+git clone https://github.com/SilentWolf27/my-bookmarks.git
+cd my-bookmarks
+```
 
-  - [] The application features a clean and intuitive user interface that allows users to navigate between categories and bookmarks effortlessly.
-  - [] Users can mark bookmarks as favorites to access them quickly from the main page.
-  - [] Most used bookmarks will be displayed on the main page for quick access.
+2. Install dependencies
 
-## Tech Stack
+```bash
+npm install
+```
 
-- Frontend:
-  - Next.js
-  - Tailwind CSS
+3. Create a `.env` file and add the following variables:
 
-- Backend:
-  - Next.js Server Actions
-  - Supabase
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 
-- Database:
-  - PostgreSQL
+AUTH_GITHUB_CLIENT_ID=
+AUTH_GITHUB_CLIENT_SECRET=
+AUTH_GITHUB_REDIRECT_URI=
+EMAIL_CONFIRMATION_REDIRECT_URI=
+```
 
-- Hosting:
-  - Vercel
+4. Run the development server
+
+```bash
+npm run dev
+```
+
+## 📝 Features
+
+### Authentication:
+
+  - ✅ Email/Password authentication with account verification
+  - ✅ GitHub OAuth integration
+  - ✅ Protected routes via middleware
+  - ✅ Email verification flow
+
+### Collections:
+
+- ✅ Create new collections
+- ✅ Nested collections support
+- 🚧 Edit collection details (In Progress)
+- 🚧 Delete collections (In Progress)
+- 🚧 Reorder collections (Planned)
+
+### Bookmarks:
+
+  - ✅ Create and edit bookmarks
+  - ✅ Title, URL, and description fields
+  - ✅ Search functionality
+  - ✅ Favorite bookmarks feature
+  - 🚧 Tags system (Planned)
+  - 🚧 Bulk operations (Planned)
+

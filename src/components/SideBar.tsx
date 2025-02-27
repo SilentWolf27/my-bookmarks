@@ -1,28 +1,16 @@
 import { signOut } from "@/auth/actions/signOut";
-import { LogoutOutlined, PlusOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import { LogoutOutlined } from "@ant-design/icons";
 import CollectionsNav from "../collections/components/CollectionsNav";
+
 import { createClient } from "@/supabase/clients/server";
 import { getCollections } from "@/collections/api/getCollections";
 
 export async function SideBar() {
   const supabase = await createClient();
   const collections = await getCollections(supabase);
-  console.log(collections);
 
   return (
-    <aside className="min-w-[300px] w-[18%] max-w-[420px] px-6 py-8 bg-background text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden">
-      <article>
-        <div className="flex justify-between items-center">
-          <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
-          <Link
-            href={"/nuevo"}
-            className="flex justify-center items-center bg-zinc-300 px-2 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-sm">
-            <PlusOutlined className="text-sm" />
-          </Link>
-        </div>
-      </article>
-
+    <aside className="min-w-[300px] w-[18%] max-w-[420px] py-8 text-primary-font flex flex-col justify-start max-h-dvh overflow-hidden bg-white rounded-md">
       <CollectionsNav collections={collections} />
       <form action={signOut}>
         <button
