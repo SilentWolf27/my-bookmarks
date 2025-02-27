@@ -31,6 +31,7 @@ export default function CollectionNavItem({
           isActive ? "bg-gray-200" : ""
         }`}>
         <Link
+          onClick={() => setIsOpen(true)}
           href={`/colecciones/${collection.id}`}
           className={`w-full h- full  px-4 py-1 flex items-center gap-2 text-nowrap overflow-hidden text-ellipsis ${
             isChild ? "pl-10" : ""
