@@ -15,7 +15,7 @@ export async function SignInWithGithub() {
 
   if (error || !data.url) return redirect("auth-error");
 
-  console.log("🚀 ~ SignInWithGithub ~ data:", data);
+  console.log("🚀 ~ SignInWithGithub ~ data:", process.env.AUTH_GITHUB_REDIRECT_URI);
 
   return redirect(data.url);
 }
