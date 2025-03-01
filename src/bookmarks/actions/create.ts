@@ -10,7 +10,6 @@ export async function createBookmark(data: CreateBookmarkFormValues) {
   if (!data.url || !data.url.startsWith("http")) throw new Error("Invalid URL");
 
   const metadata = await extractOpenGraphMetadata(data.url);
-
   const supabase = await createClient();
 
   const { error } = await supabase.from("bookmarks").insert({
@@ -22,7 +21,5 @@ export async function createBookmark(data: CreateBookmarkFormValues) {
 
   if (error) buildErrorFromSupabase(error);
 
-  revalidatePath("/", "layout");
+  revalidatePath(`/colecciones/${data.collectionId}`);
 }
-
-
