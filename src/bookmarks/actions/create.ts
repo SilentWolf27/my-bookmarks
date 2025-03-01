@@ -10,19 +10,16 @@ export async function createBookmark(data: CreateBookmarkFormValues) {
   if (!data.url || !data.url.startsWith("http")) throw new Error("Invalid URL");
 
   const metadata = await extractOpenGraphMetadata(data.url);
-  console.log(metadata);
   const supabase = await createClient();
 
-  /* const { error } = await supabase.from("bookmarks").insert({
+  const { error } = await supabase.from("bookmarks").insert({
     url: data.url,
     title: metadata.title,
     image: metadata.image,
     collection_id: data.collectionId,
   });
 
-  if (error) buildErrorFromSupabase(error); */
+  if (error) buildErrorFromSupabase(error);
 
-  revalidatePath("/", "layout");
+  revalidatePath(`/colecciones/${data.collectionId}`);
 }
-
-

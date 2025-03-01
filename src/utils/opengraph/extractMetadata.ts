@@ -1,50 +1,46 @@
-import puppeteer, { Page } from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
-
-async function createBrowser() {
-    return await puppeteer.launch({
-        headless: true,
-        executablePath: await chromium.executablePath(),
-        args: [...chromium.args, '--no-sandbox'],
-    });
+interface OpenGraphMetadata {
+    title: string;
+    image: string;
+    description: string;
 }
 
-async function getMetadata(page: Page) {
-    return await page.evaluate(() => {
-        const getMetaTags = (property: string) => {
-            const metaTag = document.querySelector(property);
-            return metaTag ? metaTag.getAttribute("content") : null;
-        };
-
-        return {
-            title: getMetaTags("meta[property='og:title']") || document.title,
-            image: getMetaTags("meta[property='og:image']"),
-            description: getMetaTags("meta[property='og:description']"),
-        };
-    });
+interface OpenGraphApiResponse {
+    title: string;
+    description: string;
+    type: string;
+    image: string;
+    url: string;
+    site_name: string;
+    favicon: string;
 }
 
-async function takeScreenshot(page: Page) {
-    return await page.screenshot({ encoding: "base64", type: "webp", optimizeForSpeed: true });
+async function getFromOpenGraphApi(
+    encodedUrl: string,
+    apiKey: string
+): Promise<OpenGraphApiResponse> {
+    const response = await fetch(
+        `https://opengraph.io/api/1.1/site/${encodedUrl}?app_id=${apiKey}`
+    );
+    const data = await response.json();
+    return data.hybridGraph;
 }
 
-export async function extractOpenGraphMetadata(url: string) {
-    const browser = await createBrowser();
-    const page = await browser.newPage();
+function encodeUrl(url: string) {
+    return encodeURIComponent(url);
+}
 
-    try {
-        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 5000 });
-        const metadata = await getMetadata(page);
-        if (!metadata.image) {
-            const screenshot = await takeScreenshot(page);
-            metadata.image = `data:image/webp;base64,${screenshot}`;
-        }
+export async function extractOpenGraphMetadata(
+    url: string
+): Promise<OpenGraphMetadata> {
+    const apiKey = process.env.OPENGRAPH_API_KEY;
+    if (!apiKey) throw new Error("OPENGRAPH_API_KEY is not set");
 
-        return metadata;
-    } catch (error) {
-        console.error("Error extracting metadata:", error);
-        throw error;
-    } finally {
-        await browser.close();
-    }
+    const encodedUrl = encodeUrl(url);
+    const data = await getFromOpenGraphApi(encodedUrl, apiKey);
+
+    return {
+        title: data.title || "No title",
+        image: data.image,
+        description: data.description,
+    };
 }
