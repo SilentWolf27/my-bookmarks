@@ -43,7 +43,12 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
     <>
       <div className="w-full aspect-3/1 bg-gray-900/10 rounded-sx relative">
         {imageUrl && (
-          <Image src={imageUrl} alt={title} width={100} height={100} />
+          <Image
+            src={`bookmarks/${imageUrl}`}
+            alt={title}
+            fill
+            className="object-contain"
+          />
         )}
         <button
           className="absolute top-3 right-3 text-xs bg-white px-3 py-1 rounded-md cursor-pointer transition-[scale] duration-300 hover:scale-105 border border-gray-300"

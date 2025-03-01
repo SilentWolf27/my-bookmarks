@@ -27,13 +27,13 @@ export default function BookmarkCard({ bookmark }: Props) {
 
   return (
     <article className="flex gap-4 flex-col relative rounded-xs overflow-hidden bg-white text-primary-font group">
-      <div className="w-full h-[120px] bg-gray-900/10">
+      <div className="w-full h-[120px] bg-gray-900/10 relative">
         {bookmark.image && (
           <Image
-            src={bookmark.image}
+            src={`bookmarks/${bookmark.image}`}
             alt={bookmark.title || bookmark.url}
-            width={100}
-            height={100}
+            fill
+            className="object-contain"
           />
         )}
       </div>
