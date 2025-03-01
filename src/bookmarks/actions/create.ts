@@ -3,7 +3,6 @@
 import { createClient } from "@/supabase/clients/server";
 import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
 import { extractOpenGraphMetadata } from "@/utils/opengraph/extractMetadata";
-import { revalidatePath } from "next/cache";
 import { CreateBookmarkFormValues } from "../schemas";
 
 export async function createBookmark(data: CreateBookmarkFormValues) {
@@ -20,6 +19,4 @@ export async function createBookmark(data: CreateBookmarkFormValues) {
   });
 
   if (error) buildErrorFromSupabase(error);
-
-  revalidatePath("/", "layout");
 }
