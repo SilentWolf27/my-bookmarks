@@ -21,5 +21,5 @@ export async function createBookmark(data: CreateBookmarkFormValues) {
 
   if (error) buildErrorFromSupabase(error);
 
-  revalidatePath(`/colecciones/${data.collectionId}`);
+  revalidatePath("/", "layout");
 }
