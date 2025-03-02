@@ -48,6 +48,8 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
             alt={title}
             fill
             className="object-contain"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+            priority={true}
           />
         )}
         <button

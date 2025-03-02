@@ -10,15 +10,13 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { setFavorite } from "../actions/setFavorite";
-import { MouseEventHandler, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 interface Props {
   bookmark: Bookmark;
 }
 
 export default function BookmarkCard({ bookmark }: Props) {
   const [isFavorite, setIsFavorite] = useState(bookmark.is_favorite);
-  const router = useRouter();
 
   const handleSetFavorite = async () => {
     await setFavorite(bookmark.id, !isFavorite);
@@ -33,7 +31,9 @@ export default function BookmarkCard({ bookmark }: Props) {
             src={`bookmarks/${bookmark.image}`}
             alt={bookmark.title || bookmark.url}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-contain"
+            priority={true}
           />
         )}
       </div>
