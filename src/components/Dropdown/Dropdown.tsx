@@ -43,7 +43,9 @@ export default function Dropdown({
           onClick={close}>
           {!children && (
             <div className="flex flex-col gap-1 p-2">
-              <p className="text-sm text-gray-500">No hay acciones disponibles</p>
+              <p className="text-sm text-gray-500">
+                No hay acciones disponibles
+              </p>
             </div>
           )}
           {children}

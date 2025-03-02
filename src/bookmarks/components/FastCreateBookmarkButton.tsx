@@ -78,7 +78,7 @@ export default function FastCreateBookmarkButton({
 
         <Dropdown
           trigger={
-            <button 
+            <button
               className="bg-blue-600 text-xs text-white rounded-r-md flex items-center gap-2 px-1 py-1 cursor-pointer min-h-7"
               aria-haspopup="true"
               aria-expanded={isOpen}
