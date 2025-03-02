@@ -6,13 +6,14 @@ import FastCreateBookmarkButton from "../components/FastCreateBookmarkButton";
 import BookmarkCard from "../components/BookmarkCard";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Collection } from "@/collections/interfaces/Collections";
 
 interface Props {
   bookmarks: Bookmark[];
-  collectionId?: string;
+  collection: Collection;
 }
 
-export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
+export default function BookmarksDashboard({ bookmarks, collection }: Props) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const router = useRouter();
 
@@ -38,7 +39,7 @@ export default function BookmarksDashboard({ bookmarks, collectionId }: Props) {
           onChange={handleSearch}
         />
         <FastCreateBookmarkButton
-          collectionId={collectionId}
+          collection={collection}
           onSuccess={handleBookmarkCreated}
         />
       </section>

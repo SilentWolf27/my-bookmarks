@@ -11,9 +11,10 @@ import Dropdown from "@/components/Dropdown/Dropdown";
 import DropdownItem from "@/components/Dropdown/DropdownItem";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { createCollection } from "@/collections/actions/create";
+import { Collection } from "@/collections/interfaces/Collections";
 
 interface Props {
-  collectionId?: string;
+  collection: Collection;
   onSuccess?: () => void;
   onError?: (error: Error) => void;
 }
@@ -21,7 +22,7 @@ interface Props {
 type Action = "bookmark" | "collection";
 
 export default function FastCreateBookmarkButton({
-  collectionId,
+  collection,
   onSuccess,
   onError,
 }: Props) {
@@ -43,8 +44,9 @@ export default function FastCreateBookmarkButton({
     setIsLoading(true);
     setIsOpen(false);
     try {
-      if (action === "bookmark") await createBookmark({ url: input, collectionId });
-      else await createCollection({ name: input, parentId: collectionId });
+      if (action === "bookmark")
+        await createBookmark({ url: input, collectionId: collection.id });
+      else await createCollection({ name: input, parentId: collection.id });
       onSuccess?.();
     } catch (error) {
       onError?.(error as Error);
@@ -81,9 +83,11 @@ export default function FastCreateBookmarkButton({
             </button>
           }
           placement="bottom-right">
-          <DropdownItem onClick={selectCollectionAction}>
-            Agregar colección
-          </DropdownItem>
+          {collection.parentId === null && (
+            <DropdownItem onClick={selectCollectionAction}>
+              Agregar colección
+            </DropdownItem>
+          )}
         </Dropdown>
       </div>
 
@@ -94,7 +98,9 @@ export default function FastCreateBookmarkButton({
           onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder={action === "bookmark" ? "URL" : "Nombre de la colección"}
+            placeholder={
+              action === "bookmark" ? "URL" : "Nombre de la colección"
+            }
             name="input"
             autoFocus
             className="outline-blue-500 text-sm px-2 py-1"

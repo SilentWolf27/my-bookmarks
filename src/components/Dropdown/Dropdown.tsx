@@ -24,7 +24,7 @@ export default function Dropdown({
 
   useClickOutside({
     ref: dropdownRef,
-    handler: close
+    handler: close,
   });
 
   return (
@@ -40,8 +40,12 @@ export default function Dropdown({
           className={`absolute z-50 min-w-[200px] rounded-sm bg-white shadow-lg border border-gray-300 
             ${getDropdownStyles(placement)}
             ${className}`}
-          onClick={close}
-          >
+          onClick={close}>
+          {!children && (
+            <div className="flex flex-col gap-1 p-2">
+              <p className="text-sm text-gray-500">No hay acciones disponibles</p>
+            </div>
+          )}
           {children}
         </div>
       )}

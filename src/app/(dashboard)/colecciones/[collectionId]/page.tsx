@@ -23,7 +23,7 @@ export default async function CollectionPage({ params }: Props) {
         <p className="text-sm text-gray-500"> {collection.description} </p>
       </article>
 
-      <BookmarksDashboard bookmarks={bookmarks} collectionId={collectionId} />
+      <BookmarksDashboard bookmarks={bookmarks} collection={collection} />
     </section>
   );
 }
