@@ -78,16 +78,22 @@ export default function FastCreateBookmarkButton({
 
         <Dropdown
           trigger={
-            <button className="bg-blue-600 text-xs text-white rounded-r-md flex items-center gap-2 px-1 py-1 cursor-pointer min-h-7">
+            <button 
+              className="bg-blue-600 text-xs text-white rounded-r-md flex items-center gap-2 px-1 py-1 cursor-pointer min-h-7"
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+              role="button">
               <CaretDownOutlined />
             </button>
           }
           placement="bottom-right">
-          {collection.parentId === null && (
-            <DropdownItem onClick={selectCollectionAction}>
-              Agregar colección
-            </DropdownItem>
-          )}
+          <div role="menu">
+            {collection.parentId === null && (
+              <DropdownItem onClick={selectCollectionAction}>
+                Agregar colección
+              </DropdownItem>
+            )}
+          </div>
         </Dropdown>
       </div>
 
