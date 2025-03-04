@@ -2,6 +2,7 @@ import { queryBookmarks } from "@/bookmarks/api/queryBookmarks";
 import BookmarksDashboard from "@/bookmarks/templates/BookmarksDashboard";
 import { getCollection } from "@/collections/api/getOne";
 import { createClient } from "@/supabase/clients/server";
+import CollectionHeader from "@/collections/components/CollectionHeader";
 
 interface Props {
   params: Promise<{ collectionId: string }>;
@@ -17,13 +18,16 @@ export default async function CollectionPage({ params }: Props) {
   ]);
 
   return (
-    <section className="p-8 max-w-screen-2xl">
-      <article className="mb-8">
-        <h2 className="text-lg font-bold"> {collection.name} </h2>
-        <p className="text-sm text-gray-500"> {collection.description} </p>
-      </article>
+    <div className="min-h-screen bg-gray-50">
+      <CollectionHeader collection={collection} />
 
-      <BookmarksDashboard bookmarks={bookmarks} collection={collection} />
-    </section>
+      <main className="max-w-[1440px] mx-auto px-4 py-8">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+          <section className="p-6">
+            <BookmarksDashboard bookmarks={bookmarks} collection={collection} />
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }
