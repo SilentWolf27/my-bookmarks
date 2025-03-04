@@ -3,9 +3,10 @@
 import { ChangeEventHandler, useState } from "react";
 
 interface Props {
-  accept: string;
+  children: React.ReactNode;
+  accept?: string;
   onFileSelected: (file: File) => void;
-  children?: React.ReactNode;
+  className?: string;
   maxSize?: number;
 }
 
@@ -15,31 +16,32 @@ type FileStatus = {
 };
 
 export default function FileUploader({
+  children,
   accept,
   onFileSelected,
-  children,
+  className = "",
   maxSize = 5,
 }: Props) {
   const [isDragging, setIsDragging] = useState(false);
-  const [status, setStatus] = useState<FileStatus>({
-    type: "empty",
-    message: "",
-  });
 
   const handleDragEnter = () => setIsDragging(true);
+
   const handleDragLeave = () => setIsDragging(false);
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) =>
-    event.preventDefault();
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
 
-    const file = event.dataTransfer.files[0];
+    const file = event.dataTransfer.files?.[0];
     handleFile(file);
   };
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const file = event.target.files?.[0];
     handleFile(file);
   };
@@ -49,21 +51,12 @@ export default function FileUploader({
       if (!file) throw new Error("No se ha seleccionado ningún archivo");
       validateFile(file);
 
-      setStatus({
-        type: "success",
-        message: `Archivo cargado correctamente`,
-      });
-
       onFileSelected(file);
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Ocurrio un error desconocido";
-      setStatus({ type: "error", message: errorMessage });
-    }
+    } catch (error) {}
   };
 
   const validateFile = (file: File) => {
-    const acceptedTypes = accept.split(",").map((type) => type.trim());
+    const acceptedTypes = accept?.split(",").map((type) => type.trim()) || [];
 
     if (file.size > 1024 * 1024 * maxSize)
       throw new Error(`El archivo no puede ser mayor a ${maxSize}MB`);
@@ -91,25 +84,16 @@ export default function FileUploader({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onDragOver={handleDragOver}>
-        {children}
-
-        <input
-          type="file"
-          accept={accept}
-          onChange={handleInputChange}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-        />
+        <label className={`block cursor-pointer ${className}`}>
+          <input
+            type="file"
+            className="hidden"
+            accept={accept}
+            onChange={handleChange}
+          />
+          {children}
+        </label>
       </div>
-
-      {status.type && (
-        <p
-          className={`
-          mt-4 text-sm
-          ${status.type === "error" ? "text-red-500" : "text-green-500"}
-        `}>
-          {status.message}
-        </p>
-      )}
     </div>
   );
 }
