@@ -79,7 +79,7 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
             shadow-lg
             transition-[opacity,transform] duration-300
             opacity-0 group-hover:opacity-100 hover:scale-105
-            border border-gray-200
+            border border-gray-200 cursor-pointer
           ">
           <CameraOutlined />
           {imageUrl ? "Cambiar imagen" : "Añadir imagen"}
@@ -119,6 +119,7 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
                     text-gray-700 hover:text-gray-900
                     hover:bg-gray-100 rounded-lg
                     transition-[background-color,color] duration-300
+                    cursor-pointer
                   "
                   disabled={isUploading}>
                   Cancelar
@@ -132,6 +133,7 @@ export default function EditBookmarkImage({ imageUrl, title }: Props) {
                     hover:bg-blue-700 disabled:bg-blue-200
                     disabled:cursor-not-allowed
                     transition-colors duration-300
+                    cursor-pointer
                     flex items-center gap-2
                   ">
                   {isUploading ? (

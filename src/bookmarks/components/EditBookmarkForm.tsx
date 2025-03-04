@@ -158,7 +158,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
               inline-flex items-center gap-2 px-4 py-2
               text-sm font-medium text-red-600
               hover:text-red-700 hover:bg-red-50
-              rounded-lg transition-colors duration-200
+              rounded-lg transition-colors duration-200 cursor-pointer
             "
           >
             <DeleteOutlined />
@@ -172,7 +172,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
               text-sm font-medium text-white
               bg-blue-600 hover:bg-blue-700
               disabled:bg-blue-200 disabled:cursor-not-allowed
-              rounded-lg transition-colors duration-200
+              rounded-lg transition-colors duration-200 cursor-pointer
             "
           >
             {isSubmitting ? (
