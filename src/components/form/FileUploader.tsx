@@ -24,9 +24,22 @@ export default function FileUploader({
 }: Props) {
   const [isDragging, setIsDragging] = useState(false);
 
-  const handleDragEnter = () => setIsDragging(true);
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
 
-  const handleDragLeave = () => setIsDragging(false);
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const relatedTarget = e.relatedTarget as HTMLElement;
+
+    if (relatedTarget && e.currentTarget.contains(relatedTarget)) return;
+
+    setIsDragging(false);
+  };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
