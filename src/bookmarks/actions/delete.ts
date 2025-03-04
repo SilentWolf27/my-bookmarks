@@ -1,23 +1,28 @@
-'use server'
+"use server";
 
-import { createClient } from "@/supabase/clients/server"
+import { createClient } from "@/supabase/clients/server";
 import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
 import { redirect } from "next/navigation";
 
 interface DeleteBookmarkResponse {
-    error: Error | null;
+  error: Error | null;
 }
 
-export async function deleteBookmark(bookmarkId: string): Promise<DeleteBookmarkResponse> {
-    const supabase = await createClient();
+export async function deleteBookmark(
+  bookmarkId: string,
+  collectionId: string | null
+): Promise<DeleteBookmarkResponse> {
+  const supabase = await createClient();
 
-    const { error } = await supabase
-        .from("bookmarks")
-        .update({ deleted_at: new Date().toISOString() })
-        .eq("id", bookmarkId)
-        .is("deleted_at", null)
+  const { error } = await supabase
+    .from("bookmarks")
+    .update({ deleted_at: new Date().toISOString() })
+    .eq("id", bookmarkId)
+    .is("deleted_at", null);
 
-    if (error) return { error: buildErrorFromSupabase(error) }
+  if (error) return { error: buildErrorFromSupabase(error) };
 
-    redirect(`/inicio`);
-} 
+  if (collectionId) redirect(`/colecciones/${collectionId}`);
+
+  redirect(`/inicio`);
+}

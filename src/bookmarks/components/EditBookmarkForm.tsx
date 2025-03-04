@@ -40,9 +40,10 @@ export default function EditBookmarkForm({ bookmark }: Props) {
   };
 
   const handleDelete = async () => {
-    const result = await deleteBookmark(bookmark.id);
-    if (result.error) setError("root", { message: result.error.message });
     setIsDeleteModalOpen(false);
+    const result = await deleteBookmark(bookmark.id, bookmark.collection_id);
+    if (result.error) setError("root", { message: result.error.message });
+    
   };
 
   return (
