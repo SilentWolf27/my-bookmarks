@@ -11,10 +11,12 @@ interface Props {
 
 export default async function EditBookmarkPage({ params }: Props) {
   const { bookmarkId, collectionId } = await params;
-
   const supabase = await createClient();
-  const bookmark = await getOne(bookmarkId as string, supabase);
-  const collection = await getCollection(collectionId, supabase);
+
+  const [bookmark, collection] = await Promise.all([
+    getOne(bookmarkId as string, supabase),
+    getCollection(collectionId, supabase),
+  ]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -24,9 +26,12 @@ export default async function EditBookmarkPage({ params }: Props) {
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
           <article className="divide-gray-100">
             <section className="p-6">
-              <EditBookmarkImage imageUrl={bookmark.image} title={bookmark.title} />
+              <EditBookmarkImage
+                imageUrl={bookmark.image}
+                title={bookmark.title}
+              />
             </section>
-            
+
             <section className="p-6 bg-white">
               <EditBookmarkForm bookmark={bookmark} />
             </section>
