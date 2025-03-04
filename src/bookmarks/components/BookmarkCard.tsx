@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { setFavorite } from "../actions/setFavorite";
 import { useState } from "react";
+
 interface Props {
   bookmark: Bookmark;
 }
@@ -24,9 +25,9 @@ export default function BookmarkCard({ bookmark }: Props) {
   };
 
   return (
-    <article className="flex gap-4 flex-col relative rounded-xs overflow-hidden bg-white text-primary-font group">
-      <div className="w-full h-[120px] bg-gray-900/10 relative">
-        {bookmark.image && (
+    <article className="flex flex-col relative rounded-lg overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div className="w-full aspect-[21/9] bg-gray-50 relative">
+        {bookmark.image ? (
           <Image
             src={`bookmarks/${bookmark.image}`}
             alt={bookmark.title || bookmark.url}
@@ -35,23 +36,34 @@ export default function BookmarkCard({ bookmark }: Props) {
             className="object-contain"
             priority={true}
           />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <ExportOutlined className="text-4xl text-gray-300" />
+          </div>
         )}
       </div>
-      <div className="px-2 pb-5">
-        <h3 className="text-sm font-semibold">
+
+      <div className="p-4">
+        <h3 className="text-sm font-medium text-gray-900 truncate">
           {bookmark.title || bookmark.url}
         </h3>
+        {bookmark.description && (
+          <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+            {bookmark.description}
+          </p>
+        )}
       </div>
-      <div className="absolute hidden group-hover:block inset-0 bg-black/20 py-2 px-4">
-        <div className="flex gap-4 justify-end">
+
+      <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-200">
+        <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-end gap-2">
           <Link
-            className="cursor-pointer hover:scale-125 transition-[scale] duration-350"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors"
             href={`/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}/editar`}>
-            <EditOutlined />
+            <EditOutlined className="text-gray-600" />
           </Link>
           <button
-            className={`cursor-pointer hover:scale-125 transition-[scale] duration-350 ${
-              isFavorite ? "text-amber-400" : ""
+            className={`w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors ${
+              isFavorite ? "text-amber-400" : "text-gray-600"
             }`}
             onClick={handleSetFavorite}>
             {isFavorite ? <StarFilled /> : <StarOutlined />}
@@ -59,9 +71,9 @@ export default function BookmarkCard({ bookmark }: Props) {
           <Link
             href={bookmark.url}
             rel="noopener noreferrer"
-            className="cursor-pointer hover:scale-120 transition-[scale] duration-350"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors"
             target="_blank">
-            <ExportOutlined />
+            <ExportOutlined className="text-gray-600" />
           </Link>
         </div>
       </div>
