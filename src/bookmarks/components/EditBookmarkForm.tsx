@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { editBookmarkSchema, EditBookmarkFormValues } from "../schemas";
 import { LoadingOutlined } from "@ant-design/icons";
 import { updateBookmark } from "../actions/updateBookmark";
+import { deleteBookmark } from "../actions/delete";
 import { Bookmark } from "../interfaces";
 
 interface Props {
@@ -27,7 +28,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
   });
 
   const onSubmit = async (data: EditBookmarkFormValues) => {
-    const result = await updateBookmark(bookmark.id, data);
+    const result = await updateBookmark(bookmark.id, data, bookmark.collection_id);
     if (result.error) setError("root", { message: result.error.message });
   };
 
@@ -68,13 +69,27 @@ export default function EditBookmarkForm({ bookmark }: Props) {
         )}
       </div>
 
-      <button
-        type="submit"
-        className="text-base self-end px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-200"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? <LoadingOutlined /> : "Guardar"}
-      </button>
+      <div className="flex justify-end gap-3">
+        <button
+          type="button"
+          onClick={async () => {
+            if (confirm('¿Estás seguro de que quieres eliminar este marcador?')) {
+              const result = await deleteBookmark(bookmark.id);
+              if (result.error) setError("root", { message: result.error.message });
+            }
+          }}
+          className="text-base px-5 py-1 bg-red-600 text-white rounded hover:bg-red-700 cursor-pointer"
+        >
+          Eliminar
+        </button>
+        <button
+          type="submit"
+          className="text-base px-5 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-200 cursor-pointer"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? <LoadingOutlined /> : "Guardar"}
+        </button>
+      </div>
       {errors.root && (
         <span className="text-red-500 text-sm">{errors.root.message}</span>
       )}

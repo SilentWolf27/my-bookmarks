@@ -9,7 +9,8 @@ export async function setFavorite(bookmarkId: string, isFavorite: boolean): Prom
     const { error } = await supabase
         .from("bookmarks")
         .update({ is_favorite: isFavorite })
-        .eq("id", bookmarkId);
+        .eq("id", bookmarkId)
+        .is("deleted_at", null);
 
     if (error) buildErrorFromSupabase(error);
 }

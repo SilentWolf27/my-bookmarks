@@ -10,6 +10,7 @@ export async function getOne(
     .from("bookmarks")
     .select("id, title, url, description, collection_id, image, is_favorite")
     .eq("id", id)
+    .is("deleted_at", null)
     .single()
     .overrideTypes<Bookmark, { merge: false }>();
 
