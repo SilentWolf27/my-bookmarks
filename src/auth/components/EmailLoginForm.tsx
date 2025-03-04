@@ -14,6 +14,8 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
+const baseInputStyles = "w-full py-2 px-3 rounded-md bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors text-sm";
+
 export function EmailLoginForm() {
   const {
     handleSubmit,
@@ -40,10 +42,12 @@ export function EmailLoginForm() {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="email">Correo electrónico</label>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="email" className="text-sm font-medium text-gray-700">
+          Correo electrónico
+        </label>
         {formErrors.email && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {formErrors.email.message}
           </span>
         )}
@@ -51,15 +55,17 @@ export function EmailLoginForm() {
           type="email"
           {...register("email", { required: true })}
           placeholder="example@email.com"
-          className="w-full border border-zinc-300 rounded-md py-1 px-3 min-h-[32px]"
+          className={baseInputStyles}
           onBlur={onBlur}
         />
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="password">Contraseña</label>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="password" className="text-sm font-medium text-gray-700">
+          Contraseña
+        </label>
         {formErrors.password && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {formErrors.password.message}
           </span>
         )}
@@ -68,11 +74,11 @@ export function EmailLoginForm() {
             type={showPassword ? "text" : "password"}
             {...register("password", { required: true })}
             placeholder="********"
-            className="h-full w-full py-1 px-3 border border-zinc-300 rounded-md min-h-[32px]"
+            className={baseInputStyles}
             onBlur={onBlur}
           />
           <button
-            className="absolute right-2 top-0 bottom-0 flex items-center text-zinc-700"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
             type="button"
             onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
@@ -82,13 +88,17 @@ export function EmailLoginForm() {
 
       <button
         type="submit"
-        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300 disabled:bg-indigo-300"
+        className="w-full bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed text-sm font-medium cursor-pointer"
         disabled={isSubmitting}>
-        {isSubmitting ? <LoadingOutlined /> : "Iniciar sesión"}
+        {isSubmitting ? (
+          <LoadingOutlined className="text-base" />
+        ) : (
+          "Iniciar sesión"
+        )}
       </button>
 
       {formErrors.root && (
-        <span className="text-red-600 text-sm">{formErrors.root.message}</span>
+        <span className="text-sm text-red-600">{formErrors.root.message}</span>
       )}
     </form>
   );

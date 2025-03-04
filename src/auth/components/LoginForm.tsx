@@ -6,25 +6,25 @@ import { SignInWithGithub } from "@/auth/actions/github";
 
 export function LoginForm() {
   return (
-    <div className="w-full max-w-sm flex flex-col gap-6 bg-white py-12 px-10 rounded-md">
+    <div className="w-full bg-white rounded-lg shadow-sm border border-gray-100 p-8">
       <SocialLoginForm action={SignInWithGithub}>
-        <GithubFilled />
+        <GithubFilled className="text-lg" />
         Inicia Sesión con GitHub
       </SocialLoginForm>
 
-      <div className="flex items-center gap-4">
-        <span className="inline-block border-b border-zinc-300 w-full"></span>
-        <p className="text-md">o</p>
-        <span className="inline-block border-b border-zinc-300 w-full"></span>
+      <div className="flex items-center gap-4 my-6">
+        <span className="inline-block border-b border-gray-200 w-full"></span>
+        <p className="text-sm text-gray-500">o</p>
+        <span className="inline-block border-b border-gray-200 w-full"></span>
       </div>
 
       <EmailLoginForm />
 
-      <p className="text-sm text-right">
+      <p className="text-sm text-gray-600 text-center mt-6">
         ¿Aún no tienes una cuenta?{" "}
         <Link
           href="registro"
-          className="text-indigo-500 hover:underline decoration-indigo-600">
+          className="text-blue-600 hover:text-blue-700 font-medium">
           Regístrate aquí
         </Link>
       </p>

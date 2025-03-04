@@ -10,7 +10,7 @@ export function SocialLoginForm({ children, action }: Props) {
     <form action={action}>
       <button
         type="submit"
-        className="w-full flex justify-center items-center gap-2 border border-zinc-300 rounded-md py-2 px-4 cursor-pointer hover:bg-zinc-50 transition-[background-color] duration-200">
+        className="w-full flex justify-center items-center gap-2 border border-gray-200 rounded-md py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
         {children}
       </button>
     </form>
