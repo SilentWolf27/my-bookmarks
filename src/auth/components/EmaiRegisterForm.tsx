@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FocusEventHandler } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+const baseInputStyles = "w-full py-2 px-3 rounded-md bg-white border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors text-sm";
+
 export function EmailRegisterForm() {
   const {
     handleSubmit,
@@ -31,10 +33,12 @@ export function EmailRegisterForm() {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="name">Nombre</label>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="name" className="text-sm font-medium text-gray-700">
+          Nombre
+        </label>
         {formErrors.name && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {formErrors.name.message}
           </span>
         )}
@@ -42,17 +46,19 @@ export function EmailRegisterForm() {
           type="text"
           {...register("name", { required: true })}
           placeholder="Nombre"
-          className={`w-full border border-zinc-300 rounded-md py-1 px-3 min-h-[32px] ${
-            formErrors.name ? "border-red-600" : ""
+          className={`${baseInputStyles} ${
+            formErrors.name ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
           }`}
           onBlur={onBlur}
         />
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="email">Correo electrónico</label>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="email" className="text-sm font-medium text-gray-700">
+          Correo electrónico
+        </label>
         {formErrors.email && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {formErrors.email.message}
           </span>
         )}
@@ -60,17 +66,19 @@ export function EmailRegisterForm() {
           type="email"
           {...register("email", { required: true })}
           placeholder="example@email.com"
-          className={`w-full border border-zinc-300 rounded-md py-1 px-3 min-h-[32px] ${
-            formErrors.email ? "border-red-600" : ""
+          className={`${baseInputStyles} ${
+            formErrors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
           }`}
           onBlur={onBlur}
         />
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="password">Contraseña</label>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="password" className="text-sm font-medium text-gray-700">
+          Contraseña
+        </label>
         {formErrors.password && (
-          <span className="text-red-600 text-sm">
+          <span className="text-sm text-red-600">
             {formErrors.password.message}
           </span>
         )}
@@ -78,8 +86,8 @@ export function EmailRegisterForm() {
           type="password"
           {...register("password", { required: true })}
           placeholder="********"
-          className={`w-full border border-zinc-300 rounded-md py-1 px-3 min-h-[32px] ${
-            formErrors.password ? "border-red-600" : ""
+          className={`${baseInputStyles} ${
+            formErrors.password ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
           }`}
           onBlur={onBlur}
         />
@@ -87,12 +95,17 @@ export function EmailRegisterForm() {
 
       <button
         type="submit"
-        className="w-full bg-indigo-500 text-white rounded-md py-2 px-4 hover:bg-indigo-600 active:bg-indigo-700 transition-[background-color] duration-300 disabled:bg-indigo-300"
+        className="w-full bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-not-allowed text-sm font-medium cursor-pointer"
         disabled={isSubmitting}>
-        {isSubmitting ? <LoadingOutlined /> : "Registrarse"}
+        {isSubmitting ? (
+          <LoadingOutlined className="text-base" />
+        ) : (
+          "Registrarse"
+        )}
       </button>
+
       {formErrors.root && (
-        <span className="text-red-600 text-sm">{formErrors.root.message}</span>
+        <span className="text-sm text-red-600">{formErrors.root.message}</span>
       )}
     </form>
   );
