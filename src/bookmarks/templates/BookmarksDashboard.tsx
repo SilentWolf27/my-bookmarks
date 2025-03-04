@@ -3,7 +3,7 @@
 import Searchbar from "@/components/Searchbar/Searchbars";
 import { Bookmark } from "../interfaces";
 import BookmarkCard from "../components/BookmarkCard";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Collection } from "@/collections/interfaces/Collections";
 import FastCreateBookmarkButton from "../components/FastCreate/FastCreateBookmarkButton";
@@ -25,18 +25,30 @@ export default function BookmarksDashboard({ bookmarks, collection }: Props) {
     router.refresh();
   };
 
-  const filteredBookmarks = searchTerm
-    ? bookmarks.filter((bookmark) =>
-        bookmark.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : bookmarks;
+  const filteredBookmarks = useMemo(() => {
+    if (!searchTerm) return bookmarks;
+
+    const searchLower = searchTerm.toLowerCase();
+    return bookmarks.filter((bookmark) => {
+      const searchableFields = [
+        bookmark.title,
+        bookmark.url,
+        bookmark.description,
+      ].filter((field): field is string => field !== null);
+
+      return searchableFields.some((field) =>
+        field.toLowerCase().includes(searchLower)
+      );
+    });
+  }, [bookmarks, searchTerm]);
 
   return (
     <>
       <section className="flex justify-end items-center gap-2">
         <Searchbar
-          className="w-full max-w-[300px] py-1 px-3 rounded-md bg-white"
+          className="w-full max-w-[300px]"
           onChange={handleSearch}
+          value={searchTerm}
         />
         <FastCreateBookmarkButton
           collection={collection}
@@ -51,7 +63,7 @@ export default function BookmarksDashboard({ bookmarks, collection }: Props) {
           ))}
         </section>
       ) : (
-        <section className="w-full mt-20 text-lg text-gray-600 text-center ">
+        <section className="w-full mt-20 text-lg text-gray-600 text-center">
           {searchTerm ? (
             <p>No se encontraron resultados</p>
           ) : (
