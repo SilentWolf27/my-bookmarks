@@ -17,43 +17,46 @@ export default function CollectionsNav({ collections }: Props) {
   const currentPath = usePathname();
 
   return (
-    <>
-      <article className="mb-4 px-6">
+    <div className="flex flex-col h-full">
+      <div className="p-4 border-b border-gray-100">
         <div className="flex justify-between items-center">
-          <h1 className="text-left font-bold text-lg">My Bookmarks</h1>
+          <h1 className="text-lg font-semibold text-gray-900">My Bookmarks</h1>
           <button
-            className="flex justify-center items-center bg-zinc-300 px-2 h-6 text-primary-font hover:bg-zinc-400 transition-[background-color] duration-250 rounded-xs"
+            className="w-8 h-8 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
             onClick={() => setIsAdding(true)}>
-            <PlusOutlined className="text-sm" />
+            <PlusOutlined className="text-gray-600" />
           </button>
         </div>
-      </article>
-      <ul className="h-full max-h-full overflow-y-auto flex flex-col gap-1">
-        <li
-          className={`flex items-center justify-between font-medium text-primary-font hover:bg-gray-200 transition-[background-color] duration-250 text-sm overflow-hidden text-nowrap text-ellipsis whitespace-nowrap group hover:text-primary-font ${
-            currentPath === "/inicio" ? "bg-gray-200" : ""
-          }`}>
-          <Link
-            href="/inicio"
-            className="w-full h- full  px-4 py-1 flex items-center gap-2">
-            <HomeOutlined className="text-lg" />
-            <span>Inicio</span>
-          </Link>
-        </li>
+      </div>
 
-        {isAdding && (
+      <nav className="flex-1 overflow-y-auto py-2">
+        <ul className="space-y-1">
           <li>
-            <NewCollectionInput onClose={() => setIsAdding(false)} />
+            <Link
+              href="/inicio"
+              className={`flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-md transition-colors ${
+                currentPath === "/inicio" ? "bg-gray-50 text-gray-900" : ""
+              }`}>
+              <HomeOutlined className="text-base" />
+              <span>Inicio</span>
+            </Link>
           </li>
-        )}
-        {collections.map((collection) => (
-          <CollectionNavItem
-            key={collection.id}
-            collection={collection}
-            currentPath={currentPath}
-          />
-        ))}
-      </ul>
-    </>
+
+          {isAdding && (
+            <li className="px-4">
+              <NewCollectionInput onClose={() => setIsAdding(false)} />
+            </li>
+          )}
+
+          {collections.map((collection) => (
+            <CollectionNavItem
+              key={collection.id}
+              collection={collection}
+              currentPath={currentPath}
+            />
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }

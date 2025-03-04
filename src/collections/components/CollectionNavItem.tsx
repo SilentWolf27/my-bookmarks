@@ -9,7 +9,7 @@ import {
   FolderOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import BookmarkNavItem from "../../bookmarks/components/BookmarkNavItem";
+
 interface Props {
   collection: Collection;
   currentPath: string;
@@ -24,34 +24,35 @@ export default function CollectionNavItem({
   const [isOpen, setIsOpen] = useState(false);
 
   const isActive = currentPath === `/colecciones/${collection.id}`;
+
   return (
-    <li className="flex flex-col  text-primary-font text-sm whitespace-nowrap">
-      <article
-        className={`w-full flex items-center justify-between hover:bg-gray-200 transition-[background-color] duration-250 font-medium group ${
-          isActive ? "bg-gray-200" : ""
-        }`}>
+    <li className="flex flex-col">
+      <div className="flex items-center">
         <Link
           onClick={() => setIsOpen(true)}
           href={`/colecciones/${collection.id}`}
-          className={`w-full h- full  px-4 py-1 flex items-center gap-2 text-nowrap overflow-hidden text-ellipsis ${
-            isChild ? "pl-10" : ""
-          }`}>
+          className={`flex-1 flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded-md transition-colors ${
+            isActive ? "bg-gray-50 text-gray-900" : ""
+          } ${isChild ? "pl-10" : ""}`}>
           {isActive ? (
-            <FolderOpenOutlined className="text-lg" />
+            <FolderOpenOutlined className="text-base" />
           ) : (
-            <FolderOutlined className="text-lg" />
+            <FolderOutlined className="text-base" />
           )}
-          {collection.name}
+          <span className="truncate">{collection.name}</span>
         </Link>
-        <button
-          className="cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-350 ease-in-out py-1 px-3 text-sm"
-          onClick={() => setIsOpen((prev) => !prev)}>
-          {isOpen ? <CaretUpOutlined /> : <CaretDownOutlined />}
-        </button>
-      </article>
 
-      {isOpen && (
-        <ul className="flex flex-col gap-1 py-1">
+        {collection.collections.length > 0 && (
+          <button
+            className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors"
+            onClick={() => setIsOpen((prev) => !prev)}>
+            {isOpen ? <CaretUpOutlined /> : <CaretDownOutlined />}
+          </button>
+        )}
+      </div>
+
+      {isOpen && collection.collections.length > 0 && (
+        <ul className="mt-1 space-y-1">
           {collection.collections.map((collection) => (
             <CollectionNavItem
               key={collection.id}
@@ -60,13 +61,6 @@ export default function CollectionNavItem({
               isChild={true}
             />
           ))}
-          {/* {collection.bookmarks.map((bookmark) => (
-            <BookmarkNavItem
-              key={bookmark.id}
-              bookmark={bookmark}
-              className={`pr-3 ${isChild ? "pl-17" : "pl-10"}`}
-            />
-          ))} */}
         </ul>
       )}
     </li>
