@@ -2,11 +2,11 @@
 
 import Searchbar from "@/components/Searchbar/Searchbars";
 import { Bookmark } from "../interfaces";
-import FastCreateBookmarkButton from "../components/FastCreateBookmarkButton";
 import BookmarkCard from "../components/BookmarkCard";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Collection } from "@/collections/interfaces/Collections";
+import FastCreateBookmarkButton from "../components/FastCreate/FastCreateBookmarkButton";
 
 interface Props {
   bookmarks: Bookmark[];
