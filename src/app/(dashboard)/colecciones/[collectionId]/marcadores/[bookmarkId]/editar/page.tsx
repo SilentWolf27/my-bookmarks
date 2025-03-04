@@ -22,20 +22,18 @@ export default async function EditBookmarkPage({ params }: Props) {
     <div className="min-h-screen bg-gray-50">
       <EditBookmarkHeader bookmark={bookmark} collection={collection} />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-          <article className="divide-gray-100">
-            <section className="p-6">
-              <EditBookmarkImage
-                imageUrl={bookmark.image}
-                title={bookmark.title}
-              />
-            </section>
+          <section className="p-6">
+            <EditBookmarkImage
+              imageUrl={bookmark.image}
+              title={bookmark.title}
+            />
+          </section>
 
-            <section className="p-6 bg-white">
-              <EditBookmarkForm bookmark={bookmark} />
-            </section>
-          </article>
+          <section className="p-6">
+            <EditBookmarkForm bookmark={bookmark} />
+          </section>
         </div>
       </main>
     </div>

@@ -47,8 +47,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Title Field */}
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         <div className="relative">
           <input
             {...register("title")}
@@ -82,7 +81,6 @@ export default function EditBookmarkForm({ bookmark }: Props) {
           )}
         </div>
 
-        {/* Description Field */}
         <div className="relative">
           <textarea
             {...register("description")}
@@ -93,6 +91,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
               transition-[color, border-color] duration-200
               placeholder-transparent outline-0
               resize-none min-h-[80px]
+             field-sizing-content
             "
             placeholder="Descripción"
             id="description"
@@ -117,7 +116,6 @@ export default function EditBookmarkForm({ bookmark }: Props) {
           )}
         </div>
 
-        {/* URL Field */}
         <div className="relative">
           <input
             {...register("url")}
@@ -152,8 +150,7 @@ export default function EditBookmarkForm({ bookmark }: Props) {
           )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-end gap-3 pt-6 border-t border-gray-100">
+        <div className="flex justify-end gap-3 pt-6">
           <button
             type="button"
             onClick={() => setIsDeleteModalOpen(true)}
