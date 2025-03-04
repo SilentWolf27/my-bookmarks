@@ -26,7 +26,6 @@ export default function Dropdown({
     ref: dropdownRef,
     handler: close,
   });
-
   return (
     <div
       className="relative"
@@ -41,14 +40,15 @@ export default function Dropdown({
             ${getDropdownStyles(placement)}
             ${className}`}
           onClick={close}>
-          {!children && (
+          {children ? (
+            children
+          ) : (
             <div className="flex flex-col gap-1 p-2">
               <p className="text-sm text-gray-500">
                 No hay acciones disponibles
               </p>
             </div>
           )}
-          {children}
         </div>
       )}
     </div>

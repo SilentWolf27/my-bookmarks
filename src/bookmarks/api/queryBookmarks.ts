@@ -18,7 +18,10 @@ export async function queryBookmarks(
   if (filters.collectionId) query.eq("collection_id", filters.collectionId);
   if (filters.search) query.like("title", `%${filters.search}%`);
 
-  const { data, error } = await query.returns<Bookmark[]>();
+  const { data, error } = await query.overrideTypes<
+    Bookmark[],
+    { merge: false }
+  >();
 
   if (error) buildErrorFromSupabase(error);
 

@@ -9,7 +9,7 @@ export async function getCollections(
     .from("collections")
     .select("id, name, description, parentId:parent_id")
     .is("deleted_at", null)
-    .returns<Collection[]>();
+    .overrideTypes<Collection[], { merge: false }>();
 
   if (error) throw buildErrorFromSupabase(error.code);
 
@@ -21,7 +21,9 @@ function groupCollections(collections: Collection[]): Collection[] {
   return buildCollectionHierarchy(collections, collectionMap);
 }
 
-function createCollectionMap(collections: Collection[]): Map<string, Collection> {
+function createCollectionMap(
+  collections: Collection[]
+): Map<string, Collection> {
   const map = new Map<string, Collection>();
 
   for (const collection of collections) {
@@ -40,7 +42,9 @@ function buildCollectionHierarchy(
   for (const collection of collections) {
     const mappedCollection = collectionMap.get(collection.id)!;
     const isRoot = collection.parentId === null;
-    const parent = collection.parentId ? collectionMap.get(collection.parentId) : null;
+    const parent = collection.parentId
+      ? collectionMap.get(collection.parentId)
+      : null;
 
     if (isRoot || !parent) {
       rootCollections.push(mappedCollection);

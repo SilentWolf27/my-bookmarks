@@ -87,13 +87,11 @@ export default function FastCreateBookmarkButton({
             </button>
           }
           placement="bottom-right">
-          <div role="menu">
-            {collection.parentId === null && (
-              <DropdownItem onClick={selectCollectionAction}>
-                Agregar colección
-              </DropdownItem>
-            )}
-          </div>
+          {collection.parentId === null && (
+            <DropdownItem onClick={selectCollectionAction}>
+              Agregar colección
+            </DropdownItem>
+          )}
         </Dropdown>
       </div>
 
