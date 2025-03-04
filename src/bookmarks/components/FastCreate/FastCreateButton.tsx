@@ -17,6 +17,8 @@ interface Props {
   canCreateCollection: boolean;
 }
 
+const buttonBaseStyles = "bg-blue-600 text-white flex items-center gap-2 px-2 py-1 cursor-pointer min-h-7 hover:bg-blue-700 transition-colors";
+
 export default function CreateButtonGroup({
   formState,
   onBookmarkClick,
@@ -27,7 +29,7 @@ export default function CreateButtonGroup({
     <div className="flex gap-1">
       <button
         id="fast-create-bookmark-button"
-        className="bg-blue-600 text-sm text-white rounded-l-md flex items-center gap-2 px-2 py-1 cursor-pointer min-h-7 hover:bg-blue-700 transition-colors"
+        className={`${buttonBaseStyles} text-sm rounded-l-md`}
         onClick={onBookmarkClick}
         aria-label="Agregar marcador rápido">
         {formState.isLoading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -37,7 +39,7 @@ export default function CreateButtonGroup({
       <Dropdown
         trigger={
           <button
-            className="bg-blue-600 text-xs text-white rounded-r-md flex items-center gap-2 px-1 py-1 cursor-pointer min-h-7 hover:bg-blue-700 transition-colors"
+            className={`${buttonBaseStyles} text-xs rounded-r-md`}
             aria-haspopup="true"
             role="button">
             <CaretDownOutlined />

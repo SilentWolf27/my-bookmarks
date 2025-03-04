@@ -1,16 +1,26 @@
 "use client";
 
 import { useState, useRef } from "react";
-import {
-  FolderAddOutlined,
-  LinkOutlined,
-} from "@ant-design/icons";
+import { FolderAddOutlined, LinkOutlined } from "@ant-design/icons";
 import { createBookmark } from "../../actions/create";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { createCollection } from "@/collections/actions/create";
 import { Props, FormState } from "./types";
 import CreateButtonGroup from "./FastCreateButton";
 import FastCreateForm from "./FastCreateForm";
+
+const FORM_PROPS = {
+  bookmark: {
+    title: "Nuevo marcador",
+    icon: <LinkOutlined className="text-blue-600" />,
+    placeholder: "https://ejemplo.com",
+  },
+  collection: {
+    title: "Nueva colección",
+    icon: <FolderAddOutlined className="text-blue-600" />,
+    placeholder: "Nombre de la colección",
+  },
+} as const;
 
 export default function FastCreateFormContainer({
   collection,
@@ -46,7 +56,9 @@ export default function FastCreateFormContainer({
       } else {
         await createCollection({ name: input, parentId: collection.id });
       }
+
       onSuccess?.();
+
       setFormState((prev) => ({ ...prev, isFormOpen: false }));
     } catch {
       // Error handling will be implemented later
@@ -55,43 +67,20 @@ export default function FastCreateFormContainer({
     }
   };
 
-  const selectCollectionAction = () => {
-    setFormState((prev) => ({ 
-      ...prev, 
-      action: "collection", 
+  const handleActionSelect = (action: FormState["action"]) => {
+    setFormState((prev) => ({
+      ...prev,
+      action,
       isFormOpen: true,
     }));
-  };
-
-  const selectBookmarkAction = () => {
-    setFormState((prev) => ({ 
-      ...prev, 
-      action: "bookmark", 
-      isFormOpen: true,
-    }));
-  };
-
-  const getFormProps = () => {
-    if (formState.action === "bookmark") {
-      return {
-        title: "Nuevo marcador",
-        icon: <LinkOutlined className="text-blue-600" />,
-        placeholder: "https://ejemplo.com",
-      };
-    }
-    return {
-      title: "Nueva colección",
-      icon: <FolderAddOutlined className="text-blue-600" />,
-      placeholder: "Nombre de la colección",
-    };
   };
 
   return (
     <div className="relative">
       <CreateButtonGroup
         formState={formState}
-        onBookmarkClick={selectBookmarkAction}
-        onCollectionClick={selectCollectionAction}
+        onBookmarkClick={() => handleActionSelect("bookmark")}
+        onCollectionClick={() => handleActionSelect("collection")}
         canCreateCollection={collection.parentId === null}
       />
 
@@ -99,7 +88,7 @@ export default function FastCreateFormContainer({
         isOpen={formState.isFormOpen}
         onSubmit={handleSubmit}
         formRef={formRef}
-        {...getFormProps()}
+        {...FORM_PROPS[formState.action]}
       />
     </div>
   );

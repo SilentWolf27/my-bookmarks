@@ -8,7 +8,7 @@ export async function getCollection(
 ): Promise<Collection> {
   const { data, error } = await supabase
     .from("collections")
-    .select("id, name, description")
+    .select("id, name, description, parentId:parent_id")
     .eq("id", id)
     .maybeSingle()
     .overrideTypes<Collection, { merge: false }>();
