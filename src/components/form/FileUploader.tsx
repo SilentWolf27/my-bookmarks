@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEventHandler, useState } from "react";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 interface Props {
   children: React.ReactNode;
@@ -23,21 +24,20 @@ export default function FileUploader({
   maxSize = 5,
 }: Props) {
   const [isDragging, setIsDragging] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setError(null);
     setIsDragging(true);
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
     const relatedTarget = e.relatedTarget as HTMLElement;
-
     if (relatedTarget && e.currentTarget.contains(relatedTarget)) return;
-
     setIsDragging(false);
   };
 
@@ -49,12 +49,14 @@ export default function FileUploader({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
+    setError(null);
 
     const file = event.dataTransfer.files?.[0];
     handleFile(file);
   };
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setError(null);
     const file = event.target.files?.[0];
     handleFile(file);
   };
@@ -63,9 +65,10 @@ export default function FileUploader({
     try {
       if (!file) throw new Error("No se ha seleccionado ningún archivo");
       validateFile(file);
-
       onFileSelected(file);
-    } catch (error) {}
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Error al procesar el archivo");
+    }
   };
 
   const validateFile = (file: File) => {
@@ -90,8 +93,9 @@ export default function FileUploader({
         className={`
           relative w-full min-h-32 border-dashed border-2 rounded-md 
           flex flex-col items-center justify-center p-4
-          transition-colors duration-200
+          transition-[border-color,background-color] duration-200
           ${isDragging ? "border-blue-400 bg-blue-50" : "border-gray-300"}
+          ${error ? "border-red-400 bg-red-50" : ""}
         `}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
@@ -106,6 +110,14 @@ export default function FileUploader({
           />
           {children}
         </label>
+        {error && (
+          <div className="absolute inset-0 flex items-center justify-center bg-red-50/80 backdrop-blur-[1px] animate-fade-in">
+            <div className="flex items-center gap-2 text-red-500">
+              <ExclamationCircleOutlined className="text-lg" />
+              <span className="text-sm font-medium">{error}</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
