@@ -4,7 +4,7 @@ interface Props {
 
 export default function Modal({ children }: Props) {
   return (
-    <div className="min-w-sm bg-white py-3 px-6 rounded-sm max-h-full overflow-hidden">
+    <div className="min-w-sm bg-white py-3 px-6 rounded-sm max-h-full overflow-hidden animate-fade-in">
       {children}
     </div>
   );
