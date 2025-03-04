@@ -17,6 +17,6 @@ export async function getOne(
   if (error) throw buildErrorFromSupabase(error);
 
   if (!data) throw new Error("Bookmark not found");
-
+  
   return data;
 }
