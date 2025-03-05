@@ -25,7 +25,7 @@ export default function BookmarkCard({ bookmark }: Props) {
   };
 
   return (
-    <article className="flex flex-col relative rounded-lg overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+    <article className="group flex flex-col relative rounded-lg overflow-hidden bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="w-full aspect-[21/9] bg-gray-50 relative">
         {bookmark.image ? (
           <Image
@@ -54,28 +54,27 @@ export default function BookmarkCard({ bookmark }: Props) {
         )}
       </div>
 
-      <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-200">
-        <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-end gap-2">
-          <Link
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors"
-            href={`/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}/editar`}>
-            <EditOutlined className="text-gray-600" />
-          </Link>
-          <button
-            className={`w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors ${
-              isFavorite ? "text-amber-400" : "text-gray-600"
-            }`}
-            onClick={handleSetFavorite}>
-            {isFavorite ? <StarFilled /> : <StarOutlined />}
-          </button>
-          <Link
-            href={bookmark.url}
-            rel="noopener noreferrer"
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors"
-            target="_blank">
-            <ExportOutlined className="text-gray-600" />
-          </Link>
-        </div>
+      <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity duration-200" />
+      <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-end gap-2">
+        <Link
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors shadow-sm md:opacity-0 md:group-hover:opacity-100"
+          href={`/colecciones/${bookmark.collection_id}/marcadores/${bookmark.id}/editar`}>
+          <EditOutlined className="text-gray-600" />
+        </Link>
+        <button
+          className={`w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors shadow-sm md:opacity-0 md:group-hover:opacity-100 cursor-pointer ${
+            isFavorite ? "text-amber-400" : "text-gray-600"
+          }`}
+          onClick={handleSetFavorite}>
+          {isFavorite ? <StarFilled /> : <StarOutlined />}
+        </button>
+        <Link
+          href={bookmark.url}
+          rel="noopener noreferrer"
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white transition-colors shadow-sm md:opacity-0 md:group-hover:opacity-100"
+          target="_blank">
+          <ExportOutlined className="text-gray-600" />
+        </Link>
       </div>
     </article>
   );
