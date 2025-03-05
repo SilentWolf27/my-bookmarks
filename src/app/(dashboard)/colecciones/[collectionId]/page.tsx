@@ -21,7 +21,7 @@ export default async function CollectionPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header>
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="flex items-center gap-2 text-sm text-gray-600 max-w-[1440px] mx-auto px-4 md:px-4 pr-16 md:pr-4">
           <FolderOutlined className="mr-1" />
           <span className="text-gray-900 font-medium">{collection.name}</span>
         </div>

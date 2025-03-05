@@ -23,10 +23,14 @@ export default async function EditBookmarkPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center max-w-4xl mx-auto px-4 md:px-4 pr-16 md:pr-4">
           <div className="flex items-center gap-2 text-sm text-gray-600 min-w-0">
             <FolderOutlined className="mr-1 flex-shrink-0" />
-            <span className="truncate max-w-[120px] md:max-w-[200px] lg:max-w-[300px]" title={collection.name}>{collection.name}</span>
+            <span
+              className="truncate max-w-[120px] md:max-w-[200px] lg:max-w-[300px]"
+              title={collection.name}>
+              {collection.name}
+            </span>
             <span className="text-gray-400 flex-shrink-0">/</span>
             <span
               className="text-gray-900 font-medium truncate max-w-[120px] md:max-w-[200px] flex-shrink-0"
