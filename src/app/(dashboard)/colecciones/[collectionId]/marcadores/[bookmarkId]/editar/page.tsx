@@ -24,12 +24,12 @@ export default async function EditBookmarkPage({ params }: Props) {
     <div className="min-h-screen bg-gray-50">
       <Header>
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <FolderOutlined className="mr-1" />
-            <span>{collection.name}</span>
-            <span className="text-gray-400">/</span>
+          <div className="flex items-center gap-2 text-sm text-gray-600 min-w-0">
+            <FolderOutlined className="mr-1 flex-shrink-0" />
+            <span className="truncate max-w-[120px] md:max-w-[200px] lg:max-w-[300px]" title={collection.name}>{collection.name}</span>
+            <span className="text-gray-400 flex-shrink-0">/</span>
             <span
-              className="text-gray-900 font-medium truncate max-w-[200px]"
+              className="text-gray-900 font-medium truncate max-w-[120px] md:max-w-[200px] flex-shrink-0"
               title={bookmark.title}>
               {bookmark.title}
             </span>
@@ -37,7 +37,7 @@ export default async function EditBookmarkPage({ params }: Props) {
 
           <Link
             href={`/colecciones/${collection.id}`}
-            className="flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            className="flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0 ml-2">
             <ArrowLeftOutlined className="mr-1" />
             Volver
           </Link>
