@@ -44,9 +44,9 @@ export default function BookmarkCard({ bookmark }: Props) {
       </div>
 
       <div className="p-4">
-        <h3 className="text-sm font-medium text-gray-900 truncate">
+        <p className="text-sm font-medium text-gray-900 truncate">
           {bookmark.title || bookmark.url}
-        </h3>
+        </p>
         {bookmark.description && (
           <p className="text-xs text-gray-500 mt-1 line-clamp-2">
             {bookmark.description}
