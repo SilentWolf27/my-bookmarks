@@ -1,4 +1,4 @@
-import { SideBar } from "@/components/SideBar";
+import { Sidebar } from "@/components/Sidebar/Sidebar";
 
 export default function DashboardLayout({
   children,
@@ -8,7 +8,7 @@ export default function DashboardLayout({
   return (
     <>
       <div className="flex h-full w-full flex-col md:flex-row">
-        <SideBar />
+        <Sidebar />
         <main className="w-full">{children}</main>
       </div>
     </>
